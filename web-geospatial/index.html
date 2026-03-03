@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <meta name="description" content="Use Viewer to start building new applications or easily embed Cesium into existing applications.">
+    <meta name="cesium-sandcastle-labels" content="Beginner, Showcases">
+
+    <!-- Include the CesiumJS JavaScript and CSS files -->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
+    
+    <!-- bootstrap link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+    <link rel="manifest" href="./img/site.webmanifest">
+
+    <title>Web Geo - Uswatun Hasanah</title>
+  </head>
+<body>
+  <section class="container-fluid">
+    <div class="row position-relative">
+      <div id="cesiumContainer" class="fullSize h-100 p-0 m-0"></div>
+      <div id="toolbar" class="position-absolute d-flex flex-row col-lg-8">
+        <!-- <select class="cesium-button btn-lg" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select> -->
+        
+        <input
+          id="searchBox"
+          type="number"
+          class="form-control m-2"
+          placeholder="Search for 2D find No_Kusioner (1-100)"
+          aria-label="Search Box"
+        />
+        <input type="text" id="inputBuilding" class="form-control m-2" placeholder="Enter 3D building name" />
+        <!-- <select id="dropdownBuildings" class="cesium-button btn-lg">
+          <option></option>
+        </select> -->
+      </div>
+    </div>
+  </section>
+  
+  <script src="/index.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+ </div>
+</body>
+</html>

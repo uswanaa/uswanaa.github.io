@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Integrasi Layanan Loket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .page-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Custom Colors for Google Forms (Purple) */
+        .bg-forms { background-color: #673ab7; }
+        .text-forms { color: #673ab7; }
+        .border-forms { border-color: #673ab7; }
+        .bg-forms-light { background-color: #f3e5f5; }
+        .hover-border-forms:hover { border-color: #673ab7; }
+        
+        /* Custom Colors for Google Sheets (Green) */
+        .bg-sheets { background-color: #0f9d58; }
+        .text-sheets { color: #0f9d58; }
+        .border-sheets { border-color: #0f9d58; }
+        .bg-sheets-light { background-color: #e8f5e9; }
+        .hover-border-sheets:hover { border-color: #0f9d58; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+
+    <!-- CONTAINER UTAMA -->
+    <div class="w-full max-w-4xl relative">
+        
+        <!-- HALAMAN UTAMA -->
+        <div id="main-menu" class="page-transition opacity-100 scale-100">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight mb-3">Loket Kantah Mamuju Tengah</h1>
+                <p class="text-gray-500 text-lg">Pencatatan dan penelusuran berkas loket terintegrasi dalam satu platform. Pilih fitur untuk melanjutkan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tombol Google Form (Ungu) -->
+                <button onclick="showSection('forms-section')" class="group p-8 glass-card rounded-[2rem] shadow-xl hover:shadow-purple-200 hover:-translate-y-2 transition-all duration-300 text-left relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="bg-forms text-white p-4 rounded-2xl inline-block mb-6 shadow-lg shadow-purple-200">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 leading-tight">Form</h3>
+                    <p class="text-gray-500 text-sm">Input dan pencatatan data pelayanan.</p>
+                </button>
+
+                <!-- Tombol Spreadsheet (Hijau) -->
+                <button onclick="showSection('sheets-section')" class="group p-8 glass-card rounded-[2rem] shadow-xl hover:shadow-green-200 hover:-translate-y-2 transition-all duration-300 text-left relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="bg-sheets text-white p-4 rounded-2xl inline-block mb-6 shadow-lg shadow-green-200">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 leading-tight">Data Rekap</h3>
+                    <p class="text-gray-500 text-sm">Rekapitulasi data pelayanan secara terpusat.</p>
+                </button>
+
+                <!-- Tombol Dashboard (Hitam/Gelap) -->
+                <a href="https://lookerstudio.google.com/reporting/50f259af-2aaa-447f-9412-c5c7f871c069" target="_blank" class="group p-8 bg-gray-900 rounded-[2rem] shadow-2xl hover:shadow-gray-400 hover:-translate-y-2 transition-all duration-300 text-left relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="bg-white/10 text-white p-4 rounded-2xl inline-block mb-6 border border-white/20">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 leading-tight">Dashboard</h3>
+                    <p class="text-gray-400 text-sm">Pemantauan data pelayanan secara real-time.</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- SEKSI GOOGLE FORM (UNGU) -->
+        <div id="forms-section" class="hidden page-transition opacity-0 scale-95">
+            <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <button onclick="backToMain('forms-section')" class="font-bold text-forms hover:text-purple-900 transition-colors flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        KEMBALI KE MENU
+                    </button>
+                    <h2 class="text-3xl font-extrabold text-gray-900">Integrasi Google Form</h2>
+                </div>
+                <div class="px-4 py-2 bg-forms-light text-forms rounded-full text-sm font-semibold border border-purple-100">
+                    Sistem Terkoneksi
+                </div>
+            </div>
+            
+            <!-- Gform -->
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Loket 1 G-Form -->
+                <a href="https://forms.gle/RLZz2U3JGHkmMFmm8" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-forms transition-all duration-300">
+                    <div class="w-16 h-16 bg-forms-light text-forms rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-forms group-hover:text-white transition-all">1</div>
+                    <span class="font-bold text-gray-800 text-lg">Informasi Pengunjung</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Form</span>
+                </a>
+                <!-- Loket 2 G-Form -->
+                <a href="https://forms.gle/VXNAm5YK5xegRt697" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-forms transition-all duration-300">
+                    <div class="w-16 h-16 bg-forms-light text-forms rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-forms group-hover:text-white transition-all">2</div>
+                    <span class="font-bold text-gray-800 text-lg">Berkas Masuk</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Form</span>
+                </a>
+                <!-- Loket 3 G-Form -->
+                <a href="https://forms.gle/DLrkRu8D9qohmwH48" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-forms transition-all duration-300">
+                    <div class="w-16 h-16 bg-forms-light text-forms rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-forms group-hover:text-white transition-all">3</div>
+                    <span class="font-bold text-gray-800 text-lg">Loket Pendaftaran</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Form</span>
+                </a>
+                <!-- Loket 4 G-Form -->
+                <a href="https://forms.gle/RD9tBnAxnLHDmMmx6" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-forms transition-all duration-300">
+                    <div class="w-16 h-16 bg-forms-light text-forms rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-forms group-hover:text-white transition-all">4</div>
+                    <span class="font-bold text-gray-800 text-lg">Loket Pembayaran</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Form</span>
+                </a>
+                <!-- Loket 5 G-Form -->
+                <a href="https://forms.gle/dkMWhcQqpXYuF97c8" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-forms transition-all duration-300">
+                    <div class="w-16 h-16 bg-forms-light text-forms rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-forms group-hover:text-white transition-all">5</div>
+                    <span class="font-bold text-gray-800 text-lg">Penyerahan Produk</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Form</span>
+                </a>
+                <!-- Loket 6 G-Form -->
+                <a href="https://forms.gle/M6CMFw6DdApfvdHf6" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-forms transition-all duration-300">
+                    <div class="w-16 h-16 bg-forms-light text-forms rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-forms group-hover:text-white transition-all">6</div>
+                    <span class="font-bold text-gray-800 text-lg text-center">Pengarsipan Berkas Selesai</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Form</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- SEKSI GOOGLE SPREADSHEET (HIJAU) -->
+        <div id="sheets-section" class="hidden page-transition opacity-0 scale-95">
+            <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <button onclick="backToMain('sheets-section')" class="font-bold text-sheets hover:text-green-900 transition-colors flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        KEMBALI KE MENU
+                    </button>
+                    <h2 class="text-3xl font-extrabold text-gray-900">Integrasi Spreadsheet</h2>
+                </div>
+                <div class="px-4 py-2 bg-sheets-light text-sheets rounded-full text-sm font-semibold border border-green-100">
+                    Sistem Terkoneksi
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Loket 1 G-Sheets -->
+                <a href="https://docs.google.com/spreadsheets/d/132d82wLSdazigg4-wm5qCMpUnrLqXMaj94yNDAp60AM/edit?gid=916880638#gid=916880638" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-sheets transition-all duration-300">
+                    <div class="w-16 h-16 bg-sheets-light text-sheets rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-sheets group-hover:text-white transition-all">1</div>
+                    <span class="font-bold text-gray-800 text-lg">Informasi Pengunjung</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Data</span>
+                </a>
+                <!-- Loket 2 G-Sheets -->
+                <a href="https://docs.google.com/spreadsheets/d/1d1yBvRyYBjZHOms4ElqHls0w8PtEqlTYJeXOabj5zmQ/edit?gid=898037613#gid=898037613" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-sheets transition-all duration-300">
+                    <div class="w-16 h-16 bg-sheets-light text-sheets rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-sheets group-hover:text-white transition-all">2</div>
+                    <span class="font-bold text-gray-800 text-lg">Berkas Masuk</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Data</span>
+                </a>
+                <!-- Loket 3 G-Sheets -->
+                <a href="https://docs.google.com/spreadsheets/d/1ZO4toZPsEpHtMhDwHABWXiBf4rfxWU64J03s4MpmkBk/edit?gid=2082007560#gid=2082007560" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-sheets transition-all duration-300">
+                    <div class="w-16 h-16 bg-sheets-light text-sheets rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-sheets group-hover:text-white transition-all">3</div>
+                    <span class="font-bold text-gray-800 text-lg">Loket Pendaftaran</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Data</span>
+                </a>
+                <!-- Loket 4 G-Sheets -->
+                <a href="https://docs.google.com/spreadsheets/d/1ufrV4ciEAR8kSpYPyDgsGdpXSSNM1vVw64FdrmR2Yk4/edit?gid=479947917#gid=479947917" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-sheets transition-all duration-300">
+                    <div class="w-16 h-16 bg-sheets-light text-sheets rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-sheets group-hover:text-white transition-all">4</div>
+                    <span class="font-bold text-gray-800 text-lg">Loket Pembayaran</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Data</span>
+                </a>
+                <!-- Loket 5 G-Sheets -->
+                <a href="https://docs.google.com/spreadsheets/d/1GysyyfifideEzAuoz-ms5AEVfgs1yJvxpHhfCeK-3XA/edit?gid=441998574#gid=441998574" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-sheets transition-all duration-300">
+                    <div class="w-16 h-16 bg-sheets-light text-sheets rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-sheets group-hover:text-white transition-all">5</div>
+                    <span class="font-bold text-gray-800 text-lg">Penyerahan Produk</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Data</span>
+                </a>
+                <!-- Loket 6 G-Sheets -->
+                <a href="https://docs.google.com/spreadsheets/d/1WVBN2h_NhgzJlU1nT0I1B5XuucUmogdNzj6mFKkPvlg/edit?gid=1568887659#gid=1568887659" target="_blank" class="group flex flex-col items-center justify-center p-10 glass-card rounded-[2.5rem] border-2 border-transparent hover:border-sheets transition-all duration-300">
+                    <div class="w-16 h-16 bg-sheets-light text-sheets rounded-2xl flex items-center justify-center text-2xl font-black mb-4 group-hover:scale-110 group-hover:bg-sheets group-hover:text-white transition-all">6</div>
+                    <span class="font-bold text-gray-800 text-lg text-center">Pengarsipan Berkas Selesai</span>
+                    <span class="text-gray-400 text-xs mt-2 font-medium uppercase tracking-widest opacity-70">Buka Data</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const mainMenu = document.getElementById('main-menu');
+
+        function showSection(sectionId) {
+            // Animasi Keluar Main Menu
+            mainMenu.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                mainMenu.classList.add('hidden');
+                const targetSection = document.getElementById(sectionId);
+                targetSection.classList.remove('hidden');
+                
+                // Animasi Masuk Target Section
+                setTimeout(() => {
+                    targetSection.classList.remove('opacity-0', 'scale-95');
+                    targetSection.classList.add('opacity-100', 'scale-100');
+                }, 50);
+            }, 400);
+        }
+
+        function backToMain(currentSectionId) {
+            const currentSection = document.getElementById(currentSectionId);
+            
+            // Animasi Keluar Current Section
+            currentSection.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                currentSection.classList.add('hidden');
+                mainMenu.classList.remove('hidden');
+
+                // Animasi Masuk Main Menu
+                setTimeout(() => {
+                    mainMenu.classList.remove('opacity-0', 'scale-95');
+                    mainMenu.classList.add('opacity-100', 'scale-100');
+                }, 50);
+            }, 400);
+        }
+    </script>
+</body>
+</html>
