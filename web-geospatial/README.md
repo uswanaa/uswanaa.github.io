@@ -3,7 +3,7 @@
 This project leverages **CesiumJS** to create a powerful 3D viewer for visualizing various assets from **Cesium Ion**. It includes features for loading 3D tilesets, GeoJSON data, dynamic terrain handling, interactive 3D models, and search functionality for querying features based on unique properties.
 
 ## Link Public Aplikasi
-https://uswanaa.github.io/web-geospatial/index.html
+https://uswanaa.github.io/web-geospatial/
 
 ## Features
 
