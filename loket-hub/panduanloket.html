@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buku Panduan - Portal Layanan Loket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Modernized Brand Colors */
+            --form-primary: #7c3aed; /* Violet 600 */
+            --form-light: #f5f3ff; /* Violet 50 */
+            --form-border: #ede9fe; /* Violet 100 */
+            
+            --sheet-primary: #10b981; /* Emerald 500 */
+            --sheet-light: #ecfdf5; /* Emerald 50 */
+            --sheet-border: #d1fae5; /* Emerald 100 */
+            
+            --bg-main: #f8fafc; /* Slate 50 */
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            /* Subtle dot pattern for modern tech doc feel */
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Semantic Color Classes */
+        .text-forms { color: var(--form-primary); }
+        .bg-forms { background-color: var(--form-primary); }
+        .bg-forms-light { background-color: var(--form-light); border-color: var(--form-border); }
+        
+        .text-sheets { color: var(--sheet-primary); }
+        .bg-sheets { background-color: var(--sheet-primary); }
+        .bg-sheets-light { background-color: var(--sheet-light); border-color: var(--sheet-border); }
+
+        /* Custom Scrollbar for sidebar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Reading Typography Enhancements */
+        .reading-text {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: #334155; /* Slate 700 */
+        }
+        
+        .nav-link.active {
+            color: #4f46e5; /* Indigo 600 */
+            background-color: #e0e7ff; /* Indigo 100 */
+            border-left: 4px solid #4f46e5;
+            padding-left: 0.5rem; /* Adjust padding to account for border */
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+
+    <!-- Top Navigation (Mobile only) -->
+    <div class="lg:hidden bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 p-4 flex justify-between items-center shadow-sm">
+        <div class="font-bold text-lg text-slate-900 flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            </div>
+            Panduan Loket
+        </div>
+        <button onclick="document.getElementById('sidebar').classList.toggle('-translate-x-full')" class="p-2 text-slate-500 hover:text-indigo-600 bg-slate-50 hover:bg-indigo-50 rounded-xl transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </div>
+
+    <div class="flex flex-col lg:flex-row min-h-screen max-w-7xl mx-auto">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside id="sidebar" class="w-72 bg-white/95 lg:bg-white/80 backdrop-blur-md border-r border-slate-200 fixed lg:sticky top-0 h-screen overflow-y-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-40 lg:z-auto shrink-0 p-6 pt-24 lg:pt-8 flex flex-col">
+            <div class="mb-10 hidden lg:flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">Portal Loket</h1>
+                    <p class="text-[11px] text-indigo-600 font-bold uppercase tracking-widest mt-0.5">Buku Panduan v1.0</p>
+                </div>
+            </div>
+
+            <nav class="space-y-1.5 flex-1">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-3">Daftar Isi</p>
+                <a href="#pendahuluan" class="nav-link active block px-3 py-2.5 text-sm font-semibold rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all border-l-4 border-transparent pl-3">1. Pendahuluan</a>
+                <a href="#portal-utama" class="nav-link block px-3 py-2.5 text-sm font-semibold rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all border-l-4 border-transparent pl-3">2. Mengakses Portal</a>
+                <a href="#panduan-form" class="nav-link block px-3 py-2.5 text-sm font-semibold rounded-lg text-slate-600 hover:text-forms hover:bg-violet-50 transition-all border-l-4 border-transparent pl-3">3. Integrasi G-Form</a>
+                <a href="#panduan-sheet" class="nav-link block px-3 py-2.5 text-sm font-semibold rounded-lg text-slate-600 hover:text-sheets hover:bg-emerald-50 transition-all border-l-4 border-transparent pl-3">4. Integrasi G-Sheet</a>
+                <a href="#dashboard" class="nav-link block px-3 py-2.5 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all border-l-4 border-transparent pl-3">5. Dashboard Monitoring</a>
+            </nav>
+
+            <div class="mt-8 p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl border border-slate-200/60 shadow-inner">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </div>
+                    <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Bantuan Teknis</p>
+                </div>
+                <p class="text-sm font-bold text-slate-800">IT Support / Admin</p>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <!-- Membatasi lebar max-w-3xl agar ergonomis untuk mata membaca baris per baris -->
+        <main class="flex-1 p-6 lg:p-12 w-full max-w-3xl mx-auto lg:ml-10">
+            
+            <!-- SECTION 1: PENDAHULUAN -->
+            <section id="pendahuluan" class="mb-24 pt-10 lg:pt-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 text-indigo-600 font-bold text-xs rounded-full mb-5 border border-indigo-100">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                    BAB 1
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight leading-tight">Pendahuluan & Tujuan</h2>
+                
+                <div class="glass-card p-8 rounded-3xl border-l-4 border-l-indigo-500 mb-8 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-700"></div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 relative z-10 flex items-center gap-2">
+                        <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Tujuan Panduan
+                    </h3>
+                    <p class="reading-text relative z-10">
+                        Buku panduan ini disusun agar <strong>Petugas loket mampu mengoperasikan dan memanfaatkan ekosistem loket digital secara mandiri</strong> berdasarkan panduan dan hasil pendampingan yang telah dilaksanakan.
+                    </p>
+                </div>
+                
+                <p class="reading-text mb-4">
+                    Sistem Portal Layanan Loket dirancang untuk menyatukan seluruh kebutuhan digital petugas dalam satu pintu (<em class="font-medium text-slate-800">Single Window</em>). Melalui portal ini, petugas tidak perlu lagi menghafal banyak tautan; cukup mengakses satu halaman utama untuk menuju ke form input, data rekapitulasi, maupun dashboard pantauan.
+                </p>
+            </section>
+
+            <!-- SECTION 2: MENGAKSES PORTAL -->
+            <section id="portal-utama" class="mb-24 pt-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-slate-200 text-slate-700 font-bold text-xs rounded-full mb-5 border border-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                    BAB 2
+                </div>
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6 tracking-tight">Mengakses Portal Utama</h2>
+                
+                <p class="reading-text mb-8">
+                    Halaman utama portal terdiri dari tiga pilar layanan utama. Petugas dapat memilih layanan sesuai dengan tugas yang akan dieksekusi saat itu.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
+                    <div class="bg-forms-light p-6 rounded-3xl border text-center hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md">
+                        <div class="w-14 h-14 bg-forms text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-violet-200">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-forms text-lg mb-1">Google Form</h4>
+                        <p class="text-xs text-slate-500 font-medium leading-relaxed">Untuk input data pemohon/layanan baru.</p>
+                    </div>
+                    <div class="bg-sheets-light p-6 rounded-3xl border text-center hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md">
+                        <div class="w-14 h-14 bg-sheets text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-200">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-sheets text-lg mb-1">Google Sheet</h4>
+                        <p class="text-xs text-slate-500 font-medium leading-relaxed">Untuk mengecek riwayat rekapitulasi data.</p>
+                    </div>
+                    <div class="bg-slate-100 p-6 rounded-3xl border border-slate-200 text-center hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md">
+                        <div class="w-14 h-14 bg-slate-800 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-slate-300">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg mb-1">Dashboard</h4>
+                        <p class="text-xs text-slate-500 font-medium leading-relaxed">Untuk memantau performa dan statistik.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: INTEGRASI GOOGLE FORM -->
+            <section id="panduan-form" class="mb-24 pt-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-forms-light text-forms font-bold text-xs rounded-full mb-5 border border-forms">
+                    <span class="w-2 h-2 rounded-full bg-forms"></span>
+                    BAB 3
+                </div>
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6 tracking-tight">Penggunaan Google Form (Input Data)</h2>
+                
+                <p class="reading-text mb-10">
+                    Bagian ini (<span class="text-forms font-bold bg-forms-light px-2 py-0.5 rounded-md">Warna Violet</span>) digunakan secara aktif oleh petugas saat menerima berkas atau melayani pemohon secara langsung di loket.
+                </p>
+
+                <!-- Modernized Timeline -->
+                <div class="relative pl-6 md:pl-0">
+                    <!-- Vertical line for mobile / center line for desktop -->
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-violet-200 via-violet-300 to-transparent rounded-full"></div>
+                    <div class="md:hidden absolute left-0 top-2 h-[90%] w-1 bg-gradient-to-b from-violet-200 to-transparent rounded-full ml-11"></div>
+
+                    <div class="space-y-12">
+                        <!-- Step 1 -->
+                        <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
+                            <div class="order-2 md:order-1 w-full md:w-[45%] md:text-right mt-6 md:mt-0">
+                                <div class="glass-card p-6 rounded-3xl border-violet-100 shadow-sm hover:shadow-lg transition-shadow duration-300 hover:border-violet-300">
+                                    <h4 class="font-bold text-slate-900 text-lg mb-2">Pilih Menu Form</h4>
+                                    <p class="text-sm text-slate-600 leading-relaxed">Pada halaman utama, klik tombol <span class="font-semibold text-forms">Integrasi Google Form Loket</span>.</p>
+                                </div>
+                            </div>
+                            <div class="order-1 md:order-2 flex items-center justify-center w-14 h-14 rounded-2xl border-4 border-white bg-forms text-white font-bold shadow-lg shadow-violet-200 z-10 shrink-0 transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 self-start md:self-center ml-4 md:ml-0">
+                                <span class="text-xl">1</span>
+                            </div>
+                            <div class="order-3 w-full md:w-[45%] hidden md:block"></div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
+                            <div class="order-1 w-full md:w-[45%] hidden md:block"></div>
+                            <div class="order-1 md:order-2 flex items-center justify-center w-14 h-14 rounded-2xl border-4 border-white bg-forms text-white font-bold shadow-lg shadow-violet-200 z-10 shrink-0 transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 self-start md:self-center ml-4 md:ml-0">
+                                <span class="text-xl">2</span>
+                            </div>
+                            <div class="order-2 md:order-3 w-full md:w-[45%] mt-6 md:mt-0">
+                                <div class="glass-card p-6 rounded-3xl border-violet-100 shadow-sm hover:shadow-lg transition-shadow duration-300 hover:border-violet-300">
+                                    <h4 class="font-bold text-slate-900 text-lg mb-2">Pilih Nomor Loket</h4>
+                                    <p class="text-sm text-slate-600 leading-relaxed">Anda akan diarahkan ke sub-menu yang menampilkan daftar Loket. Klik tombol sesuai loket Anda bertugas.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
+                            <div class="order-2 md:order-1 w-full md:w-[45%] md:text-right mt-6 md:mt-0">
+                                <div class="glass-card p-6 rounded-3xl border-violet-100 shadow-sm hover:shadow-lg transition-shadow duration-300 hover:border-violet-300">
+                                    <h4 class="font-bold text-slate-900 text-lg mb-2">Isi Data & Submit</h4>
+                                    <p class="text-sm text-slate-600 leading-relaxed">Tab baru Google Form akan terbuka. Isi data secara lengkap, lalu tekan tombol <strong class="text-slate-800">Kirim / Submit</strong>.</p>
+                                </div>
+                            </div>
+                            <div class="order-1 md:order-2 flex items-center justify-center w-14 h-14 rounded-2xl border-4 border-white bg-forms text-white font-bold shadow-lg shadow-violet-200 z-10 shrink-0 transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 self-start md:self-center ml-4 md:ml-0">
+                                <span class="text-xl">3</span>
+                            </div>
+                            <div class="order-3 w-full md:w-[45%] hidden md:block"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: INTEGRASI GOOGLE SPREADSHEET -->
+            <section id="panduan-sheet" class="mb-24 pt-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-sheets-light text-sheets font-bold text-xs rounded-full mb-5 border border-sheets">
+                    <span class="w-2 h-2 rounded-full bg-sheets"></span>
+                    BAB 4
+                </div>
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6 tracking-tight">Pemantauan Google Spreadsheet</h2>
+                
+                <p class="reading-text mb-8">
+                    Bagian ini (<span class="text-sheets font-bold bg-sheets-light px-2 py-0.5 rounded-md">Warna Hijau Emerald</span>) digunakan untuk melihat rekapan otomatis dari data yang sudah di-input melalui Form. 
+                </p>
+
+                <!-- Polished Alert Box -->
+                <div class="bg-sheets-light border border-sheets p-6 sm:p-8 rounded-3xl mb-10 relative overflow-hidden shadow-inner">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-white/40 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
+                    <h4 class="font-extrabold text-sheets mb-4 flex items-center gap-3 text-lg">
+                        <span class="p-2 bg-emerald-100 rounded-xl">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </span>
+                        Perhatian Penting Bagi Petugas!
+                    </h4>
+                    <ul class="text-emerald-900 space-y-3 pl-2 text-sm sm:text-base font-medium leading-relaxed">
+                        <li class="flex items-start gap-[0.2rem] text-left">
+                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Gunakan Spreadsheet <strong> hanya untuk mengecek atau mencari (Ctrl+F)</strong> data.
+                        </li>
+                        <li class="flex items-start gap-[0.2rem]">
+                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <p><strong>Dilarang keras menghapus/mengubah struktur kolom</strong> karena merusak sistem Dashboard.</p>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Pastikan Anda memilih loket yang tepat agar tidak salah melihat rekapitulasi data.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="glass-card p-8 rounded-3xl hover:-translate-y-1 transition-transform duration-300">
+                        <div class="text-sheets font-black text-4xl mb-3 opacity-20">01.</div>
+                        <h5 class="font-bold text-slate-900 text-lg">Akses Menu</h5>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">Kembali ke portal utama, klik tombol Integrasi Spreadsheet (Warna Hijau).</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl hover:-translate-y-1 transition-transform duration-300">
+                        <div class="text-sheets font-black text-4xl mb-3 opacity-20">02.</div>
+                        <h5 class="font-bold text-slate-900 text-lg">Pilih Loket</h5>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">Klik nomor loket Anda. Google Sheets akan terbuka di tab baru secara otomatis.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: DASHBOARD -->
+            <section id="dashboard" class="mb-10 pt-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-slate-800 text-white font-bold text-xs rounded-full mb-5 border border-slate-700">
+                    <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                    BAB 5
+                </div>
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6 tracking-tight">Dashboard Monitoring</h2>
+                
+                <div class="glass-card p-8 sm:p-10 rounded-3xl">
+                    <p class="reading-text mb-8">
+                        Dashboard adalah layar visualisasi (biasanya menggunakan Google Looker Studio) yang merangkum seluruh aktivitas loket secara <em class="font-medium text-slate-800">real-time</em>.
+                    </p>
+                    
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                        <h4 class="font-bold text-slate-900 mb-5 text-lg">Informasi yang tersaji:</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
+                            <div class="flex items-start gap-4 group">
+                                <div class="p-2.5 bg-indigo-100 text-indigo-600 rounded-xl group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                                </div>
+                                <span class="text-sm text-slate-700 leading-relaxed font-medium mt-1">Total layanan harian / bulanan.</span>
+                            </div>
+                            <div class="flex items-start gap-4 group">
+                                <div class="p-2.5 bg-emerald-100 text-emerald-600 rounded-xl group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <span class="text-sm text-slate-700 leading-relaxed font-medium mt-1">Waktu rata-rata pelayanan.</span>
+                            </div>
+                            <div class="flex items-start gap-4 group sm:col-span-2">
+                                <div class="p-2.5 bg-violet-100 text-violet-600 rounded-xl group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                </div>
+                                <span class="text-sm text-slate-700 leading-relaxed font-medium mt-1">Performa antar loket untuk memicu peningkatan mutu operasional.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECTION BOTTOM ACTIONS (PORTAL & FEEDBACK) -->
+            <div class="mt-20 pt-12 border-t border-slate-200/60 flex flex-col items-center text-center">
+                <h3 class="text-2xl font-extrabold text-slate-900 mb-3 tracking-tight">Siap Memulai Pelayanan?</h3>
+                <p class="text-slate-500 font-medium mb-10 max-w-lg">Kembali ke portal utama untuk bertugas, atau berikan masukan jika Anda menemukan kendala teknis.</p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+                    <!-- Tombol Kembali ke Portal -->
+                    <a href="loketrevisi.html" class="group inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-gradient-to-r from-indigo-600 to-violet-600 rounded-full hover:from-indigo-500 hover:to-violet-500 md:text-lg transition-all shadow-lg shadow-indigo-200 w-full sm:w-auto hover:-translate-y-0.5">
+                        Buka Portal Loket
+                        <svg class="ml-2 -mr-1 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                    
+                    <!-- Tombol Form Masukan/Kendala -->
+                    <a href="https://link-gform-masukan-anda.com" target="_blank" class="group inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-slate-700 bg-white border border-slate-300 rounded-full hover:bg-slate-50 hover:border-slate-400 hover:text-indigo-600 md:text-lg transition-all shadow-sm w-full sm:w-auto hover:-translate-y-0.5">
+                        <svg class="mr-2 -ml-1 w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                        Lapor Kendala
+                    </a>
+                </div>
+            </div>
+            
+            <footer class="mt-24 pt-8 border-t border-slate-200/60 text-center text-sm text-slate-400 font-medium">
+                <p>&copy; 2026 Sistem Integrasi Loket Digital. Dokumen dibuat berdasarkan standar operasional.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        // Active link highlighting on scroll with subtle visual adjustments
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('aside nav a.nav-link');
+        const sidebar = document.getElementById('sidebar');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                // Reset all styles to default state
+                link.className = 'nav-link block px-3 py-2.5 text-sm font-semibold rounded-lg text-slate-600 hover:bg-slate-50 transition-all border-l-4 border-transparent pl-3';
+                
+                if (link.getAttribute('href').includes(current)) {
+                    // Apply dynamic active styles based on the section
+                    let activeClass = '';
+                    if (current === 'panduan-form') {
+                        activeClass = 'text-forms bg-violet-50 border-l-4 border-forms';
+                    } else if (current === 'panduan-sheet') {
+                        activeClass = 'text-sheets bg-emerald-50 border-l-4 border-sheets';
+                    } else if (current === 'dashboard') {
+                        activeClass = 'text-slate-900 bg-slate-200 border-l-4 border-slate-800';
+                    } else {
+                        // Default active (indigo)
+                        activeClass = 'text-indigo-700 bg-indigo-50 border-l-4 border-indigo-600';
+                    }
+                    
+                    // Override default styles for the active link
+                    link.className = `nav-link active block px-3 py-2.5 text-sm font-semibold rounded-lg transition-all pl-3 ${activeClass}`;
+                } else {
+                     // Re-apply hover specific text colors for non-active links
+                     if(link.getAttribute('href').includes('panduan-form')) link.classList.add('hover:text-forms');
+                     else if(link.getAttribute('href').includes('panduan-sheet')) link.classList.add('hover:text-sheets');
+                     else if(link.getAttribute('href').includes('dashboard')) link.classList.add('hover:text-slate-900');
+                     else link.classList.add('hover:text-indigo-600');
+                }
+            });
+        });
+
+        // Auto close sidebar when a menu link is clicked on mobile
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1024) { // 1024px is lg breakpoint
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
