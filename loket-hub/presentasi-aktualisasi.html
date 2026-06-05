@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Aktualisasi - Loket Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        green: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        body, html { 
+            margin: 0; 
+            padding: 0;
+            width: 100vw; 
+            height: 100vh; 
+            font-family: 'Inter', sans-serif; 
+            overflow: hidden; 
+            background-color: #0f172a; 
+        }
+        
+        #presentation-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: white;
+            overflow: hidden; /* Mencegah overflow container utama */
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            pointer-events: none;
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+            background-color: transparent; /* Biarkan background diatur oleh kelas Tailwind */
+            padding: 0;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+            z-index: 5; /* Pastikan slide aktif ada di atas */
+        }
+
+        /* Dekorasi Khas "Greener" */
+        .shape-blob {
+            position: absolute;
+            background: #dcfce7;
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 0.6;
+        }
+        
+        .content-z { z-index: 10; position: relative; }
+        
+        /* Slide Content Container (Responsif & Scrollable) */
+        .slide-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+            padding: 2rem 1.5rem 6rem 1.5rem; /* Padding Mobile: Space bawah untuk Navigasi */
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* Izinkan scroll di mobile */
+            overflow-x: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .slide-inner {
+                padding: 4rem 4rem 6rem 4rem; /* Padding Tablet */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .slide-inner {
+                padding: 4rem 6rem 6rem 6rem; /* Padding Laptop/Desktop */
+            }
+        }
+
+        /* Custom Scrollbar for inner content */
+        .slide-inner::-webkit-scrollbar {
+            width: 6px;
+        }
+        .slide-inner::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .slide-inner::-webkit-scrollbar-thumb {
+            background-color: rgba(203, 213, 225, 0.8);
+            border-radius: 10px;
+        }
+        .slide-inner::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(148, 163, 184, 1);
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Kontainer Presentasi Fullscreen -->
+    <div id="presentation-container">
+
+        <!-- Navigasi Bawah (Responsif Navbar) -->
+        <div class="absolute bottom-0 md:bottom-6 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-12 py-3 md:py-0 bg-white/95 md:bg-transparent backdrop-blur shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] md:shadow-none max-w-[1440px] mx-auto border-t border-slate-100 md:border-none">
+            <div class="text-xs md:text-sm font-semibold text-slate-500 flex items-center gap-3 md:gap-4">
+                <span class="hidden sm:inline">ATR/BPN Mamuju Tengah</span>
+                <span class="sm:hidden">Mamuju Tengah</span>
+                <button onclick="toggleFullScreen()" class="hover:text-green-600 transition p-2 md:p-0 bg-slate-100 md:bg-transparent rounded-full" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+            <div class="flex space-x-2 md:space-x-4 items-center md:bg-white/80 md:backdrop-blur md:px-4 py-1 md:py-2 md:rounded-full md:shadow-sm md:border md:border-slate-100">
+                <button onclick="prevSlide()" class="p-2 rounded-full bg-slate-100 hover:bg-green-100 text-slate-600 hover:text-green-700 transition"><i class="fas fa-chevron-left"></i></button>
+                <span id="slide-counter" class="text-xs md:text-sm font-bold text-slate-600 min-w-[3rem] text-center">1 / 13</span>
+                <button onclick="nextSlide()" class="p-2 rounded-full bg-slate-100 hover:bg-green-100 text-slate-600 hover:text-green-700 transition"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 1: SAMPUL ================= -->
+        <div class="slide active bg-white" id="slide-1">
+            <div class="shape-blob w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] -top-[10vw] -left-[10vw]"></div>
+            <div class="shape-blob w-[40vw] h-[40vw] md:w-[25vw] md:h-[25vw] bottom-0 right-[-10vw] md:right-[5vw] bg-green-50"></div>
+            
+            <div class="slide-inner justify-center content-z">
+                <div class="mb-4 md:mb-6 mt-10 md:mt-0">
+                    <span class="inline-block px-3 py-1 md:px-4 md:py-1.5 bg-green-100 text-green-800 font-bold rounded-full text-xs md:text-sm border border-green-200">Seminar Aktualisasi Latsar CPNS</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-slate-900 leading-tight mb-6 md:mb-8 max-w-5xl">
+                    Pembangunan Ekosistem <span class="text-green-600">Loket Digital</span> Terintegrasi
+                </h1>
+                
+                <div class="mt-6 md:mt-8 flex items-center border-l-4 border-green-500 pl-4 md:pl-6">
+                    <div>
+                        <p class="font-bold text-xl md:text-2xl text-slate-800 mb-1">Uswatun Hasanah, S.P.W.K</p>
+                        <p class="text-slate-500 text-sm md:text-lg mb-1">Penata Pertanahan Ahli Pertama</p>
+                        <p class="text-xs md:text-base font-semibold text-green-700">Kantor Pertanahan Kab. Mamuju Tengah</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 2: LATAR BELAKANG ================= -->
+        <div class="slide bg-slate-50" id="slide-2">
+            <div class="slide-inner content-z">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-2 mt-4 md:mt-0">Latar Belakang & <span class="text-green-600">Isu</span></h2>
+                <div class="w-16 md:w-24 h-1.5 bg-green-500 mb-8 md:mb-12"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 flex-grow items-start lg:items-center">
+                    <div class="flex flex-col justify-center">
+                        <p class="text-lg md:text-2xl text-slate-600 leading-relaxed mb-6 md:mb-10">
+                            Volume pelayanan di loket rata-rata mencapai <strong class="text-slate-900">15-20 pemohon per hari</strong>. Namun, sistem pencatatan saat ini masih memiliki kendala.
+                        </p>
+                        
+                        <div class="space-y-4 md:space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 mt-1 mr-3 md:mr-4">
+                                    <i class="fas fa-edit text-sm md:text-base"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg md:text-xl mb-1">Pencatatan Manual</h3>
+                                    <p class="text-slate-500 text-sm md:text-lg">Berkas masuk dicatat secara manual dan terpisah antar loket layanan.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 mt-1 mr-3 md:mr-4">
+                                    <i class="fas fa-search-minus text-sm md:text-base"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg md:text-xl mb-1">Sulit Ditelusuri</h3>
+                                    <p class="text-slate-500 text-sm md:text-lg">Aplikasi KKP hanya memuat berkas yang sudah terdaftar, menyulitkan pelacakan berkas awal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 md:p-10 rounded-2xl md:rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-center relative overflow-hidden h-full max-h-[500px]">
+                        <div class="absolute top-0 right-0 w-24 h-24 md:w-40 md:h-40 bg-green-50 rounded-bl-full -z-10"></div>
+                        <h3 class="text-xl md:text-3xl font-bold text-slate-800 mb-4 md:mb-8 border-b pb-3 md:pb-4">Dampak Isu</h3>
+                        <ul class="space-y-3 md:space-y-6 text-slate-600 text-sm md:text-lg">
+                            <li class="flex items-center"><i class="fas fa-exclamation-circle text-amber-500 mr-3 md:mr-4 text-lg md:text-2xl flex-shrink-0"></i> Risiko kehilangan informasi berkas</li>
+                            <li class="flex items-center"><i class="fas fa-exclamation-circle text-amber-500 mr-3 md:mr-4 text-lg md:text-2xl flex-shrink-0"></i> Koordinasi antar petugas kurang optimal</li>
+                            <li class="flex items-center"><i class="fas fa-exclamation-circle text-amber-500 mr-3 md:mr-4 text-lg md:text-2xl flex-shrink-0"></i> Waktu pelayanan menjadi lebih lama</li>
+                            <li class="flex items-center"><i class="fas fa-exclamation-circle text-amber-500 mr-3 md:mr-4 text-lg md:text-2xl flex-shrink-0"></i> Potensi inkonsistensi data</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 3: OVERVIEW 9 KEGIATAN ================= -->
+        <div class="slide bg-white" id="slide-3">
+            <div class="slide-inner content-z">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-2 mt-4 md:mt-0">Gagasan & <span class="text-green-600">9 Tahapan Kegiatan</span></h2>
+                <div class="w-16 md:w-24 h-1.5 bg-green-500 mb-6 md:mb-10"></div>
+
+                <!-- Responsif: 1 kolom di HP, 2 kolom di tablet, 3 kolom di Desktop -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 flex-grow items-start md:items-center text-center">
+                    <!-- Baris 1: Persiapan -->
+                    <div class="p-3 md:p-4 border border-slate-100 rounded-xl bg-slate-50 shadow-sm flex flex-col justify-center h-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center text-lg md:text-xl font-bold mb-2 md:mb-3 flex-shrink-0">1</div>
+                        <h3 class="font-bold text-sm md:text-base text-slate-800 mb-1">Konsultasi Mentor</h3>
+                        <p class="text-xs text-slate-500">Penyampaian gagasan & persetujuan</p>
+                    </div>
+                    <div class="p-3 md:p-4 border border-slate-100 rounded-xl bg-slate-50 shadow-sm flex flex-col justify-center h-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center text-lg md:text-xl font-bold mb-2 md:mb-3 flex-shrink-0">2</div>
+                        <h3 class="font-bold text-sm md:text-base text-slate-800 mb-1">Koordinasi Tim</h3>
+                        <p class="text-xs text-slate-500">Diskusi dengan rekan sejawat loket</p>
+                    </div>
+                    <div class="p-3 md:p-4 border border-slate-100 rounded-xl bg-slate-50 shadow-sm flex flex-col justify-center h-full sm:col-span-2 lg:col-span-1">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center text-lg md:text-xl font-bold mb-2 md:mb-3 flex-shrink-0">3</div>
+                        <h3 class="font-bold text-sm md:text-base text-slate-800 mb-1">Pengumpulan Data</h3>
+                        <p class="text-xs text-slate-500">Mempelajari alur layanan eksisting</p>
+                    </div>
+
+                    <!-- Baris 2: Pembuatan Sistem -->
+                    <div class="p-3 md:p-4 border border-green-200 rounded-xl bg-green-50 shadow-sm transform hover:scale-105 transition relative z-10 flex flex-col justify-center h-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mx-auto bg-green-500 text-white rounded-full flex items-center justify-center text-lg md:text-xl font-bold mb-2 md:mb-3 flex-shrink-0">4</div>
+                        <h3 class="font-bold text-sm md:text-base text-green-900 mb-1">Perancangan Alur</h3>
+                        <p class="text-xs text-green-700">Membuat flowchart sistem digital</p>
+                    </div>
+                    <div class="p-3 md:p-4 border border-green-200 rounded-xl bg-green-50 shadow-sm transform hover:scale-105 transition relative z-10 flex flex-col justify-center h-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mx-auto bg-green-500 text-white rounded-full flex items-center justify-center text-lg md:text-xl font-bold mb-2 md:mb-3 flex-shrink-0">5</div>
+                        <h3 class="font-bold text-sm md:text-base text-green-900 mb-1">Integrasi Database</h3>
+                        <p class="text-xs text-green-700">Setup Google Form & Spreadsheet</p>
+                    </div>
+                    <div class="p-3 md:p-4 border border-green-200 rounded-xl bg-green-50 shadow-sm transform hover:scale-105 transition relative z-10 flex flex-col justify-center h-full sm:col-span-2 lg:col-span-1">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mx-auto bg-green-500 text-white rounded-full flex items-center justify-center text-lg md:text-xl font-bold mb-2 md:mb-3 flex-shrink-0">6</div>
+                        <h3 class="font-bold text-sm md:text-base text-green-900 mb-1">Pembuatan Website</h3>
+                        <p class="text-xs text-green-700">Membangun UI via Google Sites</p>
+                    </div>
+
+                    <!-- Baris 3: Implementasi & Evaluasi -->
+                    <div class="p-3 md:p-4 border border-slate-100 rounded-xl bg-slate-50 shadow-sm flex flex-col justify-center h-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mx-auto bg-slate-200 text-slate-600 rounded-full flex items-center justify-center text-lg md:text-xl font-bold mb-2 md:mb-3 flex-shrink-0">7</div>
+                        <h3 class="font-bold text-sm md:text-base text-slate-800 mb-1">Uji Coba Sistem</h3>
+                        <p class="text-xs text-slate-500">Testing & perbaikan bug</p>
+                    </div>
+                    <div class="p-3 md:p-4 border border-slate-100 rounded-xl bg-slate-50 shadow-sm flex flex-col justify-center h-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mx-auto bg-slate-200 text-slate-600 rounded-full flex items-center justify-center text-lg md:text-xl font-bold mb-2 md:mb-3 flex-shrink-0">8</div>
+                        <h3 class="font-bold text-sm md:text-base text-slate-800 mb-1">Sosialisasi</h3>
+                        <p class="text-xs text-slate-500">Penerapan pada petugas loket</p>
+                    </div>
+                    <div class="p-3 md:p-4 border border-slate-100 rounded-xl bg-slate-50 shadow-sm flex flex-col justify-center h-full sm:col-span-2 lg:col-span-1">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mx-auto bg-slate-200 text-slate-600 rounded-full flex items-center justify-center text-lg md:text-xl font-bold mb-2 md:mb-3 flex-shrink-0">9</div>
+                        <h3 class="font-bold text-sm md:text-base text-slate-800 mb-1">Evaluasi & Pelaporan</h3>
+                        <p class="text-xs text-slate-500">Penyusunan laporan aktualisasi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 4: FASE PERSIAPAN ================= -->
+        <div class="slide bg-slate-50" id="slide-4">
+            <div class="slide-inner content-z">
+                <div class="mt-4 md:mt-0 mb-6 md:mb-8">
+                    <span class="text-green-600 font-bold tracking-wider text-xs md:text-sm uppercase mb-1 md:mb-2 block">Tahap 1 - 3</span>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900">Fase <span class="text-green-600">Persiapan</span></h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 items-stretch flex-grow pb-4">
+                    <div class="bg-white p-5 md:p-6 lg:p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col">
+                        <div class="text-3xl md:text-4xl text-slate-200 mb-2 md:mb-3 font-black">01</div>
+                        <h3 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 text-slate-800">Konsultasi Mentor</h3>
+                        <p class="text-slate-600 text-sm md:text-base mb-4 leading-relaxed flex-grow">Penyampaian gagasan isu dan meminta arahan serta persetujuan dari pimpinan/mentor terkait rencana aktualisasi.</p>
+                        <ul class="text-xs md:text-sm text-green-700 space-y-2 pt-4 border-t border-slate-50 mt-auto">
+                            <li><i class="fas fa-check-circle mr-2"></i> Surat Persetujuan</li>
+                            <li><i class="fas fa-check-circle mr-2"></i> Catatan Arahan Mentor</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-5 md:p-6 lg:p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col">
+                        <div class="text-3xl md:text-4xl text-slate-200 mb-2 md:mb-3 font-black">02</div>
+                        <h3 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 text-slate-800">Koordinasi Sejawat</h3>
+                        <p class="text-slate-600 text-sm md:text-base mb-4 leading-relaxed flex-grow">Berdiskusi dengan sesama petugas loket pelayanan untuk menyamakan persepsi dan mengidentifikasi kendala riil di lapangan.</p>
+                        <ul class="text-xs md:text-sm text-green-700 space-y-2 pt-4 border-t border-slate-50 mt-auto">
+                            <li><i class="fas fa-check-circle mr-2"></i> Dukungan Rekan Kerja</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-5 md:p-6 lg:p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col">
+                        <div class="text-3xl md:text-4xl text-slate-200 mb-2 md:mb-3 font-black">03</div>
+                        <h3 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 text-slate-800">Pengumpulan Data</h3>
+                        <p class="text-slate-600 text-sm md:text-base mb-4 leading-relaxed flex-grow">Mempelajari SOP eksisting dan mengumpulkan bahan referensi/format pencatatan manual yang selama ini digunakan.</p>
+                        <ul class="text-xs md:text-sm text-green-700 space-y-2 pt-4 border-t border-slate-50 mt-auto">
+                            <li><i class="fas fa-check-circle mr-2"></i> Dokumen Format Lama</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 5: FASE PENGEMBANGAN ================= -->
+        <div class="slide bg-slate-900 text-white" id="slide-5">
+            <div class="shape-blob w-[70vw] h-[70vw] md:w-[50vw] md:h-[50vw] -bottom-[20vw] -right-[20vw] bg-green-900 opacity-40"></div>
+            <div class="slide-inner content-z">
+                <div class="mt-4 md:mt-0 mb-6 md:mb-8">
+                    <span class="text-green-400 font-bold tracking-wider text-xs md:text-sm uppercase mb-1 md:mb-2 block">Tahap 4 - 6</span>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Fase <span class="text-green-500">Pengembangan</span></h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 items-stretch flex-grow pb-4">
+                    <div class="bg-slate-800/80 backdrop-blur border border-slate-700 p-5 md:p-6 lg:p-8 rounded-2xl hover:-translate-y-2 transition shadow-lg flex flex-col">
+                        <i class="fas fa-project-diagram text-2xl md:text-3xl lg:text-4xl text-green-400 mb-3 md:mb-4"></i>
+                        <h3 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-3">04. Perancangan Alur</h3>
+                        <p class="text-slate-400 text-sm md:text-base leading-relaxed flex-grow">Membuat arsitektur informasi dan *flowchart* bagaimana berkas akan dicatat dan didistribusikan secara digital antar loket.</p>
+                    </div>
+                    <div class="bg-slate-800/80 backdrop-blur border border-slate-700 p-5 md:p-6 lg:p-8 rounded-2xl hover:-translate-y-2 transition shadow-lg border-b-4 border-b-green-500 relative overflow-hidden group flex flex-col">
+                        <div class="absolute inset-0 bg-green-500/5 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                        <i class="fas fa-database text-2xl md:text-3xl lg:text-4xl text-green-400 mb-3 md:mb-4 relative z-10"></i>
+                        <h3 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-3 relative z-10">05. Integrasi Data</h3>
+                        <p class="text-slate-400 text-sm md:text-base leading-relaxed relative z-10 flex-grow">Inovasi utama: Pembuatan <strong>Formulir Tunggal</strong> yang tersinkronisasi otomatis ke dalam satu <strong>Spreadsheet Induk</strong> (Database Terpusat).</p>
+                    </div>
+                    <div class="bg-slate-800/80 backdrop-blur border border-slate-700 p-5 md:p-6 lg:p-8 rounded-2xl hover:-translate-y-2 transition shadow-lg flex flex-col">
+                        <i class="fas fa-laptop-code text-2xl md:text-3xl lg:text-4xl text-green-400 mb-3 md:mb-4"></i>
+                        <h3 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-3">06. UI/UX Website</h3>
+                        <p class="text-slate-400 text-sm md:text-base leading-relaxed flex-grow">Mengemas database dan form ke dalam satu portal website (Google Sites) dengan desain dashboard interaktif yang *user friendly*.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 6: FASE IMPLEMENTASI ================= -->
+        <div class="slide bg-white" id="slide-6">
+            <div class="slide-inner content-z">
+                <div class="mt-4 md:mt-0 mb-6 md:mb-8">
+                    <span class="text-green-600 font-bold tracking-wider text-xs md:text-sm uppercase mb-1 md:mb-2 block">Tahap 7 - 9</span>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900">Fase <span class="text-green-600">Implementasi</span></h2>
+                </div>
+                
+                <div class="space-y-4 md:space-y-6 flex-grow flex flex-col justify-center pb-4">
+                    <!-- Kegiatan 7 -->
+                    <div class="flex items-start md:items-center bg-slate-50 p-4 md:p-6 rounded-2xl border border-slate-100 shadow-sm flex-col md:flex-row">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white shadow-sm rounded-full flex items-center justify-center text-xl md:text-2xl font-bold text-green-600 mb-3 md:mb-0 mr-0 md:mr-6 flex-shrink-0">7</div>
+                        <div>
+                            <h3 class="text-lg md:text-xl font-bold text-slate-800 mb-1">Uji Coba Sistem (User Testing)</h3>
+                            <p class="text-slate-600 text-sm md:text-base">Mensimulasikan input berkas untuk menemukan celah (*bug*). Melakukan perbaikan (misal: penambahan fitur pencarian) berdasarkan masukan awal.</p>
+                        </div>
+                    </div>
+                    <!-- Kegiatan 8 -->
+                    <div class="flex items-start md:items-center bg-green-50 p-4 md:p-6 rounded-2xl border border-green-200 shadow-sm relative overflow-hidden flex-col md:flex-row">
+                        <div class="absolute right-0 top-0 h-full w-1 md:w-2 bg-green-500"></div>
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white shadow-sm rounded-full flex items-center justify-center text-xl md:text-2xl font-bold text-green-600 mb-3 md:mb-0 mr-0 md:mr-6 flex-shrink-0">8</div>
+                        <div>
+                            <h3 class="text-lg md:text-xl font-bold text-slate-800 mb-1">Sosialisasi & Penerapan</h3>
+                            <p class="text-slate-600 text-sm md:text-base">Mensosialisasikan penggunaan website Ekosistem Loket Digital kepada seluruh petugas loket untuk diterapkan langsung pada pelayanan sehari-hari.</p>
+                        </div>
+                    </div>
+                    <!-- Kegiatan 9 -->
+                    <div class="flex items-start md:items-center bg-slate-50 p-4 md:p-6 rounded-2xl border border-slate-100 shadow-sm flex-col md:flex-row">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white shadow-sm rounded-full flex items-center justify-center text-xl md:text-2xl font-bold text-slate-400 mb-3 md:mb-0 mr-0 md:mr-6 flex-shrink-0">9</div>
+                        <div>
+                            <h3 class="text-lg md:text-xl font-bold text-slate-800 mb-1">Evaluasi & Penyusunan Laporan</h3>
+                            <p class="text-slate-600 text-sm md:text-base">Mengumpulkan data output, testimoni pengguna, dan menyusun draf Laporan Aktualisasi secara komprehensif.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 7: MANFAAT & CAPAIAN ================= -->
+        <div class="slide bg-slate-50" id="slide-7">
+            <div class="slide-inner content-z">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-2 mt-4 md:mt-0 text-center">Manfaat & <span class="text-green-600">Capaian</span></h2>
+                <div class="w-16 md:w-24 h-1.5 bg-green-500 mb-8 md:mb-12 lg:mb-16 mx-auto"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12 text-center flex-grow items-center pb-4">
+                    <div class="bg-white p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl shadow-sm border border-slate-100 transform md:hover:scale-105 transition h-full flex flex-col justify-center">
+                        <div class="text-5xl lg:text-7xl font-extrabold text-slate-900 mb-2 md:mb-4">100<span class="text-green-500">%</span></div>
+                        <h3 class="text-xl lg:text-2xl font-bold text-slate-800 mb-2 md:mb-3">Data Terintegrasi</h3>
+                        <p class="text-slate-500 text-sm md:text-base">Seluruh data layanan harian kini terpusat dalam database *cloud* secara *real-time*.</p>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl shadow-sm border border-slate-100 transform md:hover:scale-105 transition h-full flex flex-col justify-center">
+                        <div class="text-5xl lg:text-7xl font-extrabold text-slate-900 mb-2 md:mb-4">0</div>
+                        <h3 class="text-xl lg:text-2xl font-bold text-slate-800 mb-2 md:mb-3">Berkas Tak Terlacak</h3>
+                        <p class="text-slate-500 text-sm md:text-base">Meminimalisir risiko kehilangan informasi berkas karena pencatatan terpusat.</p>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl shadow-sm border border-slate-100 transform md:hover:scale-105 transition h-full flex flex-col justify-center">
+                        <div class="text-5xl lg:text-7xl font-extrabold text-slate-900 mb-2 md:mb-4"><i class="fas fa-bolt text-amber-400"></i></div>
+                        <h3 class="text-xl lg:text-2xl font-bold text-slate-800 mb-2 md:mb-3">Akses Cepat</h3>
+                        <p class="text-slate-500 text-sm md:text-base">Penelusuran riwayat, posisi loket, dan status berkas dapat dilakukan dalam hitungan detik.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 8: NILAI BERAKHLAK ================= -->
+        <div class="slide bg-white" id="slide-8">
+            <div class="slide-inner content-z">
+                <div class="text-center mb-6 md:mb-8 mt-4 md:mt-0">
+                    <span class="text-green-600 font-bold tracking-wider text-xs md:text-sm uppercase mb-1 md:mb-2 block">Core Values ASN</span>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900">Penerapan Nilai <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-600">BerAKHLAK</span></h2>
+                    <div class="w-16 md:w-24 h-1 bg-gradient-to-r from-green-500 to-blue-600 mx-auto mt-4 md:mt-6 rounded-full"></div>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 w-full max-w-6xl mx-auto flex-grow pb-4">
+                    <!-- Cards -->
+                    <div class="w-[48%] lg:w-[23%] bg-white p-4 lg:p-5 rounded-xl md:rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-3 md:mb-4 text-lg md:text-xl md:group-hover:scale-110 transition-transform"><i class="fas fa-hands-helping"></i></div>
+                        <h4 class="font-bold text-slate-800 text-sm lg:text-base mb-1">Berorientasi Pelayanan</h4>
+                        <p class="text-[10px] md:text-xs text-slate-500 mb-3 md:mb-4 line-clamp-2 flex-grow">Memberikan pelayanan prima dan memuaskan.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-end mb-1"><span class="text-[10px] md:text-xs font-semibold text-slate-400">Penerapan</span><span class="text-xs md:text-sm font-bold text-blue-600">100%</span></div>
+                            <div class="w-full bg-slate-100 rounded-full h-1 md:h-1.5"><div class="bg-gradient-to-r from-blue-400 to-blue-600 h-1 md:h-1.5 rounded-full w-[100%] shadow-sm"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-[48%] lg:w-[23%] bg-white p-4 lg:p-5 rounded-xl md:rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600"></div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-3 md:mb-4 text-lg md:text-xl md:group-hover:scale-110 transition-transform"><i class="fas fa-balance-scale"></i></div>
+                        <h4 class="font-bold text-slate-800 text-sm lg:text-base mb-1">Akuntabel</h4>
+                        <p class="text-[10px] md:text-xs text-slate-500 mb-3 md:mb-4 line-clamp-2 flex-grow">Bertanggung jawab atas kepercayaan.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-end mb-1"><span class="text-[10px] md:text-xs font-semibold text-slate-400">Penerapan</span><span class="text-xs md:text-sm font-bold text-red-600">95%</span></div>
+                            <div class="w-full bg-slate-100 rounded-full h-1 md:h-1.5"><div class="bg-gradient-to-r from-red-400 to-red-600 h-1 md:h-1.5 rounded-full w-[95%] shadow-sm"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="w-[48%] lg:w-[23%] bg-white p-4 lg:p-5 rounded-xl md:rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-orange-600"></div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-3 md:mb-4 text-lg md:text-xl md:group-hover:scale-110 transition-transform"><i class="fas fa-book-reader"></i></div>
+                        <h4 class="font-bold text-slate-800 text-sm lg:text-base mb-1">Kompeten</h4>
+                        <p class="text-[10px] md:text-xs text-slate-500 mb-3 md:mb-4 line-clamp-2 flex-grow">Terus belajar dan mengembangkan kapabilitas.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-end mb-1"><span class="text-[10px] md:text-xs font-semibold text-slate-400">Penerapan</span><span class="text-xs md:text-sm font-bold text-orange-600">90%</span></div>
+                            <div class="w-full bg-slate-100 rounded-full h-1 md:h-1.5"><div class="bg-gradient-to-r from-orange-400 to-orange-600 h-1 md:h-1.5 rounded-full w-[90%] shadow-sm"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="w-[48%] lg:w-[23%] bg-white p-4 lg:p-5 rounded-xl md:rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600"></div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center mb-3 md:mb-4 text-lg md:text-xl md:group-hover:scale-110 transition-transform"><i class="fas fa-users"></i></div>
+                        <h4 class="font-bold text-slate-800 text-sm lg:text-base mb-1">Harmonis</h4>
+                        <p class="text-[10px] md:text-xs text-slate-500 mb-3 md:mb-4 line-clamp-2 flex-grow">Saling peduli dan menghargai perbedaan.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-end mb-1"><span class="text-[10px] md:text-xs font-semibold text-slate-400">Penerapan</span><span class="text-xs md:text-sm font-bold text-green-600">100%</span></div>
+                            <div class="w-full bg-slate-100 rounded-full h-1 md:h-1.5"><div class="bg-gradient-to-r from-green-400 to-green-600 h-1 md:h-1.5 rounded-full w-[100%] shadow-sm"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="w-[48%] lg:w-[31%] bg-white p-4 lg:p-5 rounded-xl md:rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-purple-600"></div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-3 md:mb-4 text-lg md:text-xl md:group-hover:scale-110 transition-transform"><i class="fas fa-shield-alt"></i></div>
+                        <h4 class="font-bold text-slate-800 text-sm lg:text-base mb-1">Loyal</h4>
+                        <p class="text-[10px] md:text-xs text-slate-500 mb-3 md:mb-4 line-clamp-2 flex-grow">Berdedikasi mengutamakan kepentingan bangsa.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-end mb-1"><span class="text-[10px] md:text-xs font-semibold text-slate-400">Penerapan</span><span class="text-xs md:text-sm font-bold text-purple-600">95%</span></div>
+                            <div class="w-full bg-slate-100 rounded-full h-1 md:h-1.5"><div class="bg-gradient-to-r from-purple-400 to-purple-600 h-1 md:h-1.5 rounded-full w-[95%] shadow-sm"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="w-[48%] lg:w-[31%] bg-white p-4 lg:p-5 rounded-xl md:rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-teal-600"></div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center mb-3 md:mb-4 text-lg md:text-xl md:group-hover:scale-110 transition-transform"><i class="fas fa-sync"></i></div>
+                        <h4 class="font-bold text-slate-800 text-sm lg:text-base mb-1">Adaptif</h4>
+                        <p class="text-[10px] md:text-xs text-slate-500 mb-3 md:mb-4 line-clamp-2 flex-grow">Terus berinovasi dan antusias menggerakkan perubahan.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-end mb-1"><span class="text-[10px] md:text-xs font-semibold text-slate-400">Penerapan</span><span class="text-xs md:text-sm font-bold text-teal-600">100%</span></div>
+                            <div class="w-full bg-slate-100 rounded-full h-1 md:h-1.5"><div class="bg-gradient-to-r from-teal-400 to-teal-600 h-1 md:h-1.5 rounded-full w-[100%] shadow-sm"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full sm:w-[48%] lg:w-[31%] bg-white p-4 lg:p-5 rounded-xl md:rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-400 to-indigo-600"></div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-3 md:mb-4 text-lg md:text-xl md:group-hover:scale-110 transition-transform"><i class="fas fa-handshake"></i></div>
+                        <h4 class="font-bold text-slate-800 text-sm lg:text-base mb-1">Kolaboratif</h4>
+                        <p class="text-[10px] md:text-xs text-slate-500 mb-3 md:mb-4 line-clamp-2 flex-grow">Membangun kerja sama yang sinergis.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-end mb-1"><span class="text-[10px] md:text-xs font-semibold text-slate-400">Penerapan</span><span class="text-xs md:text-sm font-bold text-indigo-600">95%</span></div>
+                            <div class="w-full bg-slate-100 rounded-full h-1 md:h-1.5"><div class="bg-gradient-to-r from-indigo-400 to-indigo-600 h-1 md:h-1.5 rounded-full w-[95%] shadow-sm"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 9: TESTIMONI ================= -->
+        <div class="slide bg-green-600 text-white" id="slide-9">
+            <div class="shape-blob w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] -top-[20vw] -left-[20vw] bg-green-500 opacity-50"></div>
+            <div class="slide-inner content-z justify-center items-center text-center">
+                <i class="fas fa-quote-left text-4xl md:text-6xl text-green-300 mb-6 md:mb-10 opacity-50"></i>
+                <h2 class="text-2xl md:text-4xl lg:text-5xl font-semibold leading-snug md:leading-relaxed mb-8 md:mb-12 max-w-5xl">
+                    "Sistem Ekosistem Loket Digital ini sangat membantu. <span class="text-green-200">Pencatatan menjadi lebih rapi</span>, dan kami bisa memantau status serta posisi berkas antar loket dengan jauh lebih mudah."
+                </h2>
+                <div class="flex items-center">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center text-green-600 text-xl md:text-2xl mr-4 md:mr-6 font-bold shadow-lg">P</div>
+                    <div class="text-left">
+                        <p class="font-bold text-lg md:text-2xl mb-1">Petugas Loket Pelayanan</p>
+                        <p class="text-green-200 text-sm md:text-lg">Kantor Pertanahan Kab. Mamuju Tengah</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 10: KESIMPULAN ================= -->
+        <div class="slide bg-white" id="slide-10">
+            <div class="slide-inner content-z">
+                <div class="flex flex-col h-full justify-center max-w-5xl mx-auto">
+                    <div class="mb-6 md:mb-8 mt-4 md:mt-0 inline-block bg-green-100 p-3 md:p-4 rounded-xl md:rounded-2xl self-start">
+                        <i class="fas fa-flag-checkered text-2xl md:text-4xl text-green-700"></i>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 md:mb-8">Kesimpulan</h2>
+                    <div class="bg-slate-50 border border-slate-200 p-6 md:p-10 rounded-2xl md:rounded-3xl text-base md:text-xl text-slate-700 leading-relaxed shadow-sm">
+                        <p class="mb-4 md:mb-6">
+                            Pembangunan Ekosistem Loket Digital berhasil mentransformasi pencatatan manual menjadi <strong class="text-green-700">digital terintegrasi</strong> secara efektif.
+                        </p>
+                        <p>
+                            Hal ini secara nyata mendukung terwujudnya <strong>Smart Governance</strong>, meningkatkan keterbukaan informasi, meminimalisir kesalahan, dan mempercepat alur koordinasi antar loket di Kantor Pertanahan Kabupaten Mamuju Tengah.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 11: REKOMENDASI ================= -->
+        <div class="slide bg-slate-50" id="slide-11">
+            <div class="slide-inner content-z">
+                <div class="flex flex-col h-full justify-center max-w-5xl mx-auto">
+                    <div class="mb-6 md:mb-8 mt-4 md:mt-0 inline-block bg-amber-100 p-3 md:p-4 rounded-xl md:rounded-2xl self-start">
+                        <i class="fas fa-lightbulb text-2xl md:text-4xl text-amber-600"></i>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 md:mb-8">Rekomendasi</h2>
+                    <div class="bg-white border border-slate-200 p-6 md:p-10 rounded-2xl md:rounded-3xl shadow-sm">
+                        <ul class="space-y-4 md:space-y-6 text-base md:text-xl text-slate-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-circle-right text-green-500 mt-1 mr-3 md:mr-4 text-lg md:text-2xl flex-shrink-0"></i>
+                                <span>Perlu adanya dukungan penuh dari pimpinan untuk <strong>pemeliharaan server/sistem</strong> secara jangka panjang.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-circle-right text-green-500 mt-1 mr-3 md:mr-4 text-lg md:text-2xl flex-shrink-0"></i>
+                                <span>Sosialisasi berkelanjutan terkait budaya kerja digital (*paperless*) bagi seluruh pegawai.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chevron-circle-right text-green-500 mt-1 mr-3 md:mr-4 text-lg md:text-2xl flex-shrink-0"></i>
+                                <span>Menambahkan peringatan (validasi) pada form pengisian agar petugas lebih teliti menginput data.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 12: TINDAK LANJUT ================= -->
+        <div class="slide bg-white" id="slide-12">
+            <div class="slide-inner content-z justify-start md:justify-center pt-8 md:pt-4">
+                <div class="max-w-4xl mx-auto w-full">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-8 md:mb-12 text-center md:text-left lg:text-center">Rencana <span class="text-green-600">Tindak Lanjut</span></h2>
+                    
+                    <div class="space-y-4 md:space-y-6">
+                        <div class="flex bg-white p-5 md:p-6 lg:p-8 rounded-2xl shadow-sm border border-slate-200 items-start md:items-center md:hover:border-green-300 transition flex-col md:flex-row">
+                            <div class="text-2xl md:text-3xl font-black text-slate-300 mb-3 md:mb-0 mr-0 md:mr-8 w-8 md:w-10 flex-shrink-0">01</div>
+                            <div>
+                                <h3 class="font-bold text-xl md:text-2xl text-slate-800 mb-1 md:mb-2">Penyempurnaan Antarmuka (UI)</h3>
+                                <p class="text-slate-500 text-sm md:text-lg">Membuat alur pengisian form lebih sederhana dan intuitif untuk pengguna baru.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex bg-green-50 p-5 md:p-6 lg:p-8 rounded-2xl shadow-sm border border-green-200 items-start md:items-center relative overflow-hidden flex-col md:flex-row">
+                            <div class="absolute left-0 top-0 w-1 md:w-2 h-full bg-green-500"></div>
+                            <div class="text-2xl md:text-3xl font-black text-green-500 mb-3 md:mb-0 mr-0 md:mr-8 w-8 md:w-10 md:ml-4 flex-shrink-0">02</div>
+                            <div>
+                                <h3 class="font-bold text-xl md:text-2xl text-slate-800 mb-1 md:mb-2">Penambahan Fitur Lanjutan</h3>
+                                <p class="text-slate-600 text-sm md:text-lg">Mengembangkan notifikasi otomatis, penanda status warna, dan filter pencarian mahir.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex bg-white p-5 md:p-6 lg:p-8 rounded-2xl shadow-sm border border-slate-200 items-start md:items-center md:hover:border-green-300 transition flex-col md:flex-row">
+                            <div class="text-2xl md:text-3xl font-black text-slate-300 mb-3 md:mb-0 mr-0 md:mr-8 w-8 md:w-10 flex-shrink-0">03</div>
+                            <div>
+                                <h3 class="font-bold text-xl md:text-2xl text-slate-800 mb-1 md:mb-2">Pelatihan & Pemeliharaan</h3>
+                                <p class="text-slate-500 text-sm md:text-lg">Evaluasi sistem berkala dan peningkatan kapasitas (training) bagi petugas loket.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 13: PENUTUP ================= -->
+        <div class="slide bg-slate-900" id="slide-13">
+            <div class="shape-blob w-[200vw] h-[100vw] md:w-[150vw] md:h-[50vw] -bottom-[50vw] md:-bottom-[30vw] -left-[50vw] md:-left-[25vw] bg-green-900 opacity-20 rounded-t-[100%]"></div>
+            <div class="slide-inner justify-center items-center text-center content-z">
+                <h1 class="text-5xl md:text-7xl lg:text-9xl font-black text-white tracking-tight mb-4 md:mb-8 mt-10 md:mt-0">
+                    Terima <span class="text-green-500">Kasih</span>
+                </h1>
+                <div class="w-20 md:w-32 h-1.5 md:h-2 bg-green-500 mb-6 md:mb-10 mx-auto"></div>
+                <p class="text-lg md:text-2xl text-slate-400 mb-10 md:mb-16">Mohon Arahan dan Masukan dari Bapak/Ibu Penguji</p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto px-4 sm:px-0">
+                    <span class="px-6 md:px-8 py-3 rounded-full border border-slate-700 text-slate-300 text-sm md:text-lg bg-slate-800/50 backdrop-blur"><i class="fas fa-user-circle mr-2 md:mr-3"></i>Uswatun Hasanah, S.P.W.K</span>
+                    <span class="px-6 md:px-8 py-3 rounded-full border border-slate-700 text-slate-300 text-sm md:text-lg bg-slate-800/50 backdrop-blur"><i class="fas fa-map-marker-alt mr-2 md:mr-3"></i>Kantah Kab. Mamuju Tengah</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 13;
+
+        function updateSlide() {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+            document.getElementById('slide-counter').innerText = `${currentSlide} / ${totalSlides}`;
+            
+            // Auto scroll to top on new slide
+            const innerContent = document.querySelector(`#slide-${currentSlide} .slide-inner`);
+            if(innerContent) {
+                innerContent.scrollTop = 0;
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        // Toggle Fullscreen Functionality
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.warn(`Gagal memasuki mode fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            } else if (e.key === 'f' || e.key === 'F') {
+                toggleFullScreen(); // Tekan "F" untuk fullscreen
+            }
+        });
+        
+        // Touch navigation for mobile (swipe gestures)
+        let touchstartX = 0;
+        let touchendX = 0;
+        
+        document.getElementById('presentation-container').addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        document.getElementById('presentation-container').addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleGesture();
+        });
+
+        function handleGesture() {
+            // Membutuhkan swipe minimal sejauh 50px agar slide berpindah
+            if (touchendX < touchstartX - 50) {
+                nextSlide();
+            }
+            if (touchendX > touchstartX + 50) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>
