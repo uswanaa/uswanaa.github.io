@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uswa & Acan Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:#0f2f27;color:#fff;overflow-x:hidden}
+.section{padding:80px 20px;max-width:1100px;margin:auto}
+.cover{position:fixed;inset:0;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop') center/cover;display:flex;justify-content:center;align-items:center;z-index:99;text-align:center}
+.card{background:rgba(255,255,255,.08);padding:40px;border:1px solid rgba(212,175,55,.5);border-radius:20px;backdrop-filter:blur(10px)}
+h1,h2,h3{font-family:"Cormorant Garamond",serif}
+.gold{color:#d4af37}
+.btn{background:#d4af37;color:#0f2f27;border:none;padding:14px 28px;border-radius:30px;font-weight:bold;cursor:pointer}
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(rgba(15,47,39,.55),rgba(15,47,39,.55)),url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1600&auto=format&fit=crop') center/cover}
+.countdown{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.box{background:#173f35;padding:20px;border-radius:15px;min-width:90px}
+.timeline div,.event,.gift{background:#173f35;padding:20px;border-radius:16px;margin:15px 0}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
+.gallery img{width:100%;height:280px;object-fit:cover;border-radius:15px}
+a.wa{display:inline-block;margin-top:10px;color:#0f2f27;background:#d4af37;padding:12px 20px;border-radius:25px;text-decoration:none}
+footer{text-align:center;padding:50px 20px}
+.fade{opacity:0;transform:translateY(30px);transition:1s}
+.fade.show{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="cover" id="cover">
+<div class="card">
+<div class="gold">ᨔᨒᨆ ᨆᨀᨔᨑ</div>
+<h1>Uswa & Acan</h1>
+<p>Kepada Yth.</p>
+<h3 id="guest">Tamu Undangan</h3><br>
+<button class="btn" onclick="openInvitation()">Buka Undangan</button>
+</div>
+</div>
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<section class="hero">
+<div>
+<h3 class="gold">The Wedding Of</h3>
+<h1 style="font-size:70px">Uswa & Acan</h1>
+<p>Sabtu, 15 Juni 2028</p>
+<div class="countdown">
+<div class="box"><h2 id="d">0</h2>Hari</div>
+<div class="box"><h2 id="h">0</h2>Jam</div>
+<div class="box"><h2 id="m">0</h2>Menit</div>
+<div class="box"><h2 id="s">0</h2>Detik</div>
+</div>
+</div>
+</section>
+
+<section class="section fade">
+<h2 class="gold">Mempelai</h2>
+<br>
+<p><b>Uswatun Hasanah</b><br>Putri tercinta keluarga besar</p><br>
+<p><b>Yassar (Acan)</b><br>Putra tercinta keluarga besar</p>
+</section>
+
+<section class="section fade">
+<h2 class="gold">Love Story</h2>
+<div class="timeline">
+<div>💚 Awal perkenalan</div>
+<div>💚 Menjalin hubungan</div>
+<div>💚 Lamaran</div>
+<div>💚 Menuju pernikahan</div>
+</div>
+</section>
+
+<section class="section fade">
+<h2 class="gold">Akad & Resepsi</h2>
+<div class="event">
+<h3>Akad Nikah</h3>
+<p>15 Juni 2028 • 09.00 WITA</p>
+</div>
+<div class="event">
+<h3>Resepsi</h3>
+<p>15 Juni 2028 • 11.00 WITA</p>
+</div>
+</section>
+
+<section class="section fade">
+<h2 class="gold">Galeri</h2>
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=800&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop">
+</div>
+</section>
+
+<section class="section fade">
+<h2 class="gold">Lokasi Acara</h2>
+<p>Masukkan alamat lengkap lokasi acara</p>
+<br>
+<iframe src="https://maps.google.com/maps?q=Makassar&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="350" style="border:0;border-radius:15px"></iframe>
+</section>
+
+<section class="section fade">
+<h2 class="gold">Wedding Gift</h2>
+<div class="gift">
+<p>BCA : 1234567890</p>
+<p>a.n. Uswatun Hasanah</p>
+</div>
+<div class="gift">
+<p>DANA : 0812xxxxxxx</p>
+</div>
+</section>
+
+<section class="section fade">
+<h2 class="gold">RSVP</h2>
+<a class="wa" href="https://wa.me/6281234567890">Konfirmasi Kehadiran</a>
+</section>
+
+<footer>
+<h2>Terima Kasih</h2>
+<p>Merupakan suatu kehormatan bagi kami atas kehadiran dan doa restu Anda.</p>
+<p class="gold">Uswa & Acan</p>
+</footer>
+
+<script>
+function openInvitation(){
+document.getElementById('cover').style.display='none';
+document.getElementById('music').play().catch(()=>{});
+}
+const params=new URLSearchParams(location.search);
+document.getElementById('guest').innerText=params.get('to')||'Tamu Undangan';
+
+const target=new Date("2028-06-15T09:00:00").getTime();
+setInterval(()=>{
+const now=new Date().getTime();
+const diff=target-now;
+document.getElementById('d').innerHTML=Math.floor(diff/86400000);
+document.getElementById('h').innerHTML=Math.floor(diff%86400000/3600000);
+document.getElementById('m').innerHTML=Math.floor(diff%3600000/60000);
+document.getElementById('s').innerHTML=Math.floor(diff%60000/1000);
+},1000);
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
+});
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
