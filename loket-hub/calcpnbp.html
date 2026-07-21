@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator PNBP - Kantah Mamuju Tengah</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            500: '#d97706', // Amber-like color matching BPN accent
+                            600: '#b45309',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar for a cleaner dark UI */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        /* Hide number input spinners */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 min-h-screen flex items-center justify-center p-4 sm:p-8 selection:bg-brand-500 selection:text-white">
+
+    <!-- Background Decoration -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-brand-600/10 blur-[100px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/10 blur-[100px]"></div>
+    </div>
+
+    <div class="w-full max-w-2xl flex flex-col gap-4 z-10">
+
+        <!-- Tombol Kembali Anchor -->
+        <a href="index.html" class="group flex items-center gap-3 text-slate-400 hover:text-white font-medium text-sm transition-all w-fit">
+            <div class="w-8 h-8 rounded-full bg-slate-900/80 border border-slate-700 flex items-center justify-center group-hover:bg-brand-500 group-hover:border-brand-500 group-hover:text-white transition-all shadow-sm">
+                <i class="fa-solid fa-arrow-left text-xs"></i>
+            </div>
+            <span>Kembali ke Beranda</span>
+        </a>
+
+        <!-- Hapus max-w-2xl dari sini karena sudah dipindah ke wrapper di atas -->
+        <div class="w-full glass-panel rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+        
+        <!-- Header: Added justify-between and PP badge -->
+        <div class="p-6 sm:p-8 border-b border-slate-800 bg-slate-900/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 shadow-inner flex-shrink-0">
+                    <i class="fa-solid fa-map-location-dot text-brand-500 text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Kalkulator PNBP</h1>
+                    <p class="text-slate-400 text-sm mt-1">Kementerian ATR/BPN Kantah Mamuju Tengah</p>
+                </div>
+            </div>
+            <!-- Lencana PP No.128/2015 -->
+            <!-- <div class="self-start sm:self-center">
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs font-semibold text-slate-300 tracking-wider shadow-sm">
+                    <i class="fa-solid fa-book text-brand-500 opacity-80"></i> PP No.128/2015
+                </span>
+            </div> -->
+        </div>
+
+        <!-- Form Content -->
+        <div class="p-6 sm:p-8 space-y-8">
+            
+            <!-- Model Selection -->
+            <div class="space-y-3">
+                <label class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Model Layanan</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button type="button" onclick="setModel(1)" id="btn-model-1" class="model-btn relative p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-white font-medium text-sm transition-all text-left flex flex-col gap-2">
+                        <i class="fa-solid fa-ruler-combined text-brand-500"></i>
+                        <span>Pengukuran Pertama</span>
+                    </button>
+                    <button type="button" onclick="setModel(2)" id="btn-model-2" class="model-btn relative p-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600 font-medium text-sm transition-all text-left flex flex-col gap-2">
+                        <i class="fa-solid fa-draw-polygon text-slate-400"></i>
+                        <span>Penataan Batas</span>
+                    </button>
+                    <button type="button" onclick="setModel(3)" id="btn-model-3" class="model-btn relative p-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600 font-medium text-sm transition-all text-left flex flex-col gap-2">
+                        <i class="fa-solid fa-chart-pie text-slate-400"></i>
+                        <span>Pemecahan</span>
+                    </button>
+                    <!-- Tambahan 2 Model Baru -->
+                    <button type="button" onclick="setModel(4)" id="btn-model-4" class="model-btn relative p-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600 font-medium text-sm transition-all text-left flex flex-col gap-2">
+                        <i class="fa-solid fa-users text-slate-400"></i>
+                        <span>SK (Panitia A)</span>
+                    </button>
+                    <button type="button" onclick="setModel(5)" id="btn-model-5" class="model-btn relative p-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600 font-medium text-sm transition-all text-left flex flex-col gap-2">
+                        <i class="fa-solid fa-file-signature text-slate-400"></i>
+                        <span>PKKPR Non Berusaha</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Jenis Tanah Selection -->
+            <div id="container-jenis" class="space-y-3 transition-opacity duration-300">
+                <label class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Jenis Penggunaan</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button type="button" onclick="setJenis(60)" id="btn-jenis-60" class="jenis-btn relative p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-white font-medium text-sm transition-all flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-slate-900/50 flex items-center justify-center">
+                            <i class="fa-solid fa-leaf text-brand-500"></i>
+                        </div>
+                        <div class="text-left">
+                            <div class="block">Pertanian</div>
+                            <div id="text-koef-60" class="text-xs text-brand-500/80 font-normal">Koefisien: 60</div>
+                        </div>
+                    </button>
+                    <button type="button" onclick="setJenis(120)" id="btn-jenis-120" class="jenis-btn relative p-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600 font-medium text-sm transition-all flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-slate-900/50 flex items-center justify-center">
+                            <i class="fa-solid fa-building text-slate-400"></i>
+                        </div>
+                        <div class="text-left">
+                            <div class="block">Non Pertanian</div>
+                            <div id="text-koef-120" class="text-xs text-slate-500 font-normal">Koefisien: 120</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Input Fields -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label for="luas" class="text-sm font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                        Luas Tanah (m²)
+                    </label>
+                    <div class="relative">
+                        <input type="number" id="luas" oninput="calculate()" placeholder="0" min="0"
+                            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all font-mono text-lg">
+                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-mono">m²</span>
+                    </div>
+                </div>
+
+                <!-- Hidden by default, only shows on Pemecahan (Model 3) -->
+                <div id="container-bidang" class="space-y-2 hidden opacity-0 transition-opacity duration-300">
+                    <label for="bidang" class="text-sm font-semibold text-slate-300 uppercase tracking-wider">
+                        Jml Bidang Hasil
+                    </label>
+                    <input type="number" id="bidang" oninput="calculate()" placeholder="1" min="1"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all font-mono text-lg">
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div class="bg-slate-900/80 border-t border-slate-800 p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+                <div class="space-y-1 w-full">
+                    <p class="text-slate-400 text-sm">Total Biaya PNBP</p>
+                    <p id="result-price" class="text-3xl sm:text-4xl font-bold text-white tracking-tight break-all">Rp 0</p>
+                </div>
+                
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 w-full sm:w-auto min-w-[250px]">
+                    <p class="text-xs text-slate-500 font-semibold mb-1 uppercase tracking-wider">Detail Rumus</p>
+                    <p id="result-formula" class="text-xs text-slate-400 font-mono leading-relaxed">Pilih model dan isi form di atas.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // State variables
+        let currentState = {
+            model: 1,
+            jenis: 60, // 60 = Pertanian, 120 = Non Pertanian
+            luas: 0,
+            bidang: 0
+        };
+
+        // DOM Elements
+        const luasInput = document.getElementById('luas');
+        const bidangInput = document.getElementById('bidang');
+        const containerBidang = document.getElementById('container-bidang');
+        const containerJenis = document.getElementById('container-jenis');
+        const resultPrice = document.getElementById('result-price');
+        const resultFormula = document.getElementById('result-formula');
+
+        // Formatter for Rupiah
+        const formatRupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(number);
+        };
+
+        // Format number for display in formulas (adds dots)
+        const formatNum = (num) => {
+            return new Intl.NumberFormat('id-ID').format(num);
+        };
+
+        function setModel(modelId) {
+            currentState.model = modelId;
+            
+            // Update UI buttons for Model
+            for(let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`btn-model-${i}`);
+                const icon = btn.querySelector('i');
+                if(i === modelId) {
+                    btn.className = "model-btn relative p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-white font-medium text-sm transition-all text-left flex flex-col gap-2";
+                    icon.classList.remove('text-slate-400');
+                    icon.classList.add('text-brand-500');
+                } else {
+                    btn.className = "model-btn relative p-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600 font-medium text-sm transition-all text-left flex flex-col gap-2";
+                    icon.classList.remove('text-brand-500');
+                    icon.classList.add('text-slate-400');
+                }
+            }
+
+            // Ubah text keterangan jenis (Pengali vs Koefisien) khusus untuk Panitia A
+            const textKoef60 = document.getElementById('text-koef-60');
+            const textKoef120 = document.getElementById('text-koef-120');
+            if (modelId === 4) {
+                textKoef60.innerText = "Pengali: 20";
+                textKoef120.innerText = "Pengali: 40";
+            } else {
+                textKoef60.innerText = "Koefisien: 60";
+                textKoef120.innerText = "Koefisien: 120";
+            }
+
+            // Show/Hide Jumlah Bidang Hasil input
+            if(modelId === 3) {
+                containerBidang.classList.remove('hidden');
+                setTimeout(() => {
+                    containerBidang.classList.remove('opacity-0');
+                    containerBidang.classList.add('opacity-100');
+                }, 10);
+            } else {
+                containerBidang.classList.remove('opacity-100');
+                containerBidang.classList.add('opacity-0');
+                setTimeout(() => {
+                    containerBidang.classList.add('hidden');
+                }, 300); 
+                currentState.bidang = 0; 
+                bidangInput.value = '';
+            }
+
+            // Show/Hide Jenis Tanah (Khusus PKKPR disembunyikan karena tidak menggunakan jenis tanah)
+            if(modelId === 5) {
+                containerJenis.classList.remove('opacity-100');
+                containerJenis.classList.add('opacity-0');
+                setTimeout(() => {
+                    containerJenis.classList.add('hidden');
+                }, 300);
+            } else {
+                containerJenis.classList.remove('hidden');
+                setTimeout(() => {
+                    containerJenis.classList.remove('opacity-0');
+                    containerJenis.classList.add('opacity-100');
+                }, 10);
+            }
+
+            calculate();
+        }
+
+        function setJenis(koefisien) {
+            currentState.jenis = koefisien;
+
+            const btn60 = document.getElementById('btn-jenis-60');
+            const btn120 = document.getElementById('btn-jenis-120');
+
+            if(koefisien === 60) {
+                btn60.className = "jenis-btn relative p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-white font-medium text-sm transition-all flex items-center gap-3";
+                btn60.querySelector('i').className = "fa-solid fa-leaf text-brand-500";
+                btn60.querySelector('.text-xs').className = "text-xs text-brand-500/80 font-normal";
+                
+                btn120.className = "jenis-btn relative p-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600 font-medium text-sm transition-all flex items-center gap-3";
+                btn120.querySelector('i').className = "fa-solid fa-building text-slate-400";
+                btn120.querySelector('.text-xs').className = "text-xs text-slate-500 font-normal";
+            } else {
+                btn120.className = "jenis-btn relative p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-white font-medium text-sm transition-all flex items-center gap-3";
+                btn120.querySelector('i').className = "fa-solid fa-building text-brand-500";
+                btn120.querySelector('.text-xs').className = "text-xs text-brand-500/80 font-normal";
+                
+                btn60.className = "jenis-btn relative p-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600 font-medium text-sm transition-all flex items-center gap-3";
+                btn60.querySelector('i').className = "fa-solid fa-leaf text-slate-400";
+                btn60.querySelector('.text-xs').className = "text-xs text-slate-500 font-normal";
+            }
+
+            calculate();
+        }
+
+        function calculate() {
+            // Update state from inputs
+            currentState.luas = parseFloat(luasInput.value) || 0;
+            currentState.bidang = parseFloat(bidangInput.value) || 0;
+
+            let total = 0;
+            let formulaStr = "";
+
+            const luas = currentState.luas;
+            const koef = currentState.jenis;
+            const bidang = currentState.bidang;
+
+            // Model 1: Pengukuran Pertama
+            if (currentState.model === 1) {
+                total = 100000 + (luas * koef);
+                formulaStr = `100.000 + (${formatNum(luas)} × ${koef})`;
+            } 
+            
+            // Model 2: Penataan Batas
+            else if (currentState.model === 2) {
+                total = 100000 + (luas * koef) + 50000;
+                formulaStr = `100.000 + (${formatNum(luas)} × ${koef}) + 50.000`;
+            } 
+            
+            // Model 3: Pemecahan (Rumus Baru)
+            // Rumus = 100.000 + (Luas * Koef) + ((JumlahBidang - 1) * 100.000) + (JumlahBidang * 50.000)
+            else if (currentState.model === 3) {
+                total = 100000 + (luas * koef) + ((bidang - 1) * 100000) + (bidang * 50000);
+                formulaStr = `100.000 + (${formatNum(luas)} × ${koef}) + ((${formatNum(bidang)} - 1) × 100.000) + (${formatNum(bidang)} × 50.000)`;
+            }
+
+            // Model 4: Panitia A
+            // Jika Pertanian pengali 20, Jika Non-Pertanian pengali 40
+            else if (currentState.model === 4) {
+                const multiplier = (koef === 60) ? 20 : 40;
+                total = 350000 + (multiplier * luas);
+                formulaStr = `350.000 + (${multiplier} × ${formatNum(luas)})`;
+            }
+
+            // Model 5: PKKPR Non Berusaha
+            // Rumus Luas <= 10.000 maka 350.000 + (40 * Luas), Jika > 10.000 maka 5.000.000 + ((2/3) * Luas)
+            else if (currentState.model === 5) {
+                if (luas <= 10000) {
+                    total = 350000 + (40 * luas);
+                    formulaStr = `350.000 + (40 × ${formatNum(luas)})`;
+                } else {
+                    total = 5000000 + ((2/3) * luas);
+                    formulaStr = `5.000.000 + ((2/3) × ${formatNum(luas)})`;
+                }
+            }
+
+            // Update DOM with slight pop animation
+            resultPrice.style.transform = 'scale(0.95)';
+            resultPrice.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                resultPrice.innerText = formatRupiah(total);
+                resultFormula.innerText = formulaStr;
+                resultPrice.style.transition = 'all 0.2s ease-out';
+                resultPrice.style.transform = 'scale(1)';
+                resultPrice.style.opacity = '1';
+            }, 100);
+        }
+
+        // Initialize default calculation
+        calculate();
+    </script>
+</body>
+</html>
