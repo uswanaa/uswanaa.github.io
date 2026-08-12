@@ -154,7 +154,7 @@
                         </div>
                         <div class="text-left">
                             <div class="block">Pertanian</div>
-                            <div id="text-koef-60" class="text-xs text-brand-500/80 font-normal">Koefisien: 60</div>
+                            <div id="text-koef-60" class="text-xs text-brand-500/80 font-normal"></div>
                         </div>
                     </button>
                     <button type="button" onclick="setJenis(120)" id="btn-jenis-120" class="jenis-btn relative p-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600 font-medium text-sm transition-all flex items-center gap-3">
@@ -163,7 +163,7 @@
                         </div>
                         <div class="text-left">
                             <div class="block">Non Pertanian</div>
-                            <div id="text-koef-120" class="text-xs text-slate-500 font-normal">Koefisien: 120</div>
+                            <div id="text-koef-120" class="text-xs text-slate-500 font-normal"></div>
                         </div>
                     </button>
                 </div>
@@ -265,11 +265,11 @@
             const textKoef60 = document.getElementById('text-koef-60');
             const textKoef120 = document.getElementById('text-koef-120');
             if (modelId === 4) {
-                textKoef60.innerText = "Pengali: 20";
-                textKoef120.innerText = "Pengali: 40";
+                textKoef60.innerText = "";
+                textKoef120.innerText = "";
             } else {
-                textKoef60.innerText = "Koefisien: 60";
-                textKoef120.innerText = "Koefisien: 120";
+                textKoef60.innerText = "";
+                textKoef120.innerText = "";
             }
 
             // Show/Hide Jumlah Bidang Hasil input
