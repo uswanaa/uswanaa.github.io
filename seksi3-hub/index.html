@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Seksi Penataan & Pemberdayaan | Kantah Kab Mamuju Tengah</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter for clean, minimalist typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons for elegant minimalist icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        // Soft blue and white palette
+                        soft: {
+                            blue: '#EEF6FF',
+                            white: '#FFFFFF',
+                            text: '#2A3B52',
+                            muted: '#64748B',
+                            accent: '#3B82F6',
+                            border: '#E2E8F0'
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'blob': 'blob 10s infinite alternate',
+                        'blob-reverse': 'blob-reverse 12s infinite alternate',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'blob-reverse': {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(-30px, 50px) scale(1.2)' },
+                            '66%': { transform: 'translate(20px, -20px) scale(0.8)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #2A3B52;
+            overflow-x: hidden;
+            /* Subtle grid background */
+            background-image: 
+                linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Typography optimizations */
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: -0.02em;
+        }
+
+        /* Smooth gradient text */
+        .text-gradient {
+            background: linear-gradient(135deg, #2563EB, #38BDF8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Ambient animated blobs */
+        .ambient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Premium Glass Card Styles */
+        .portal-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 10px 25px -5px rgba(0, 0, 0, 0.03);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Generic Hover effect for cards */
+        .portal-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Animation delays */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- Soft Blue Ambient Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+        <!-- Top left soft blue -->
+        <div class="ambient-blob bg-blue-200 w-[500px] h-[500px] top-[-150px] left-[-150px] animate-blob"></div>
+        <!-- Bottom right soft cyan/sky -->
+        <div class="ambient-blob bg-sky-200 w-[600px] h-[600px] bottom-[-200px] right-[-100px] animate-blob-reverse"></div>
+        <!-- Center subtle white glow to keep text readable -->
+        <div class="ambient-blob bg-white w-[800px] h-[800px] top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 opacity-80 z-[-1]"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="w-full pt-8 pb-4 px-6 lg:px-12 z-10 animate-fade-in-up">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <!-- Agency Identity -->
+            <div class="flex items-center gap-4 group cursor-default">
+                <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-soft-border flex items-center justify-center text-blue-600 transition-transform duration-500 group-hover:scale-105 group-hover:shadow-md">
+                    <i class="ph-duotone ph-buildings text-2xl"></i>
+                </div>
+                <div class="flex flex-col text-center md:text-left">
+                    <span class="text-[10px] uppercase tracking-wider font-semibold text-soft-muted mb-0.5">Kementerian ATR / BPN</span>
+                    <h1 class="text-base font-bold text-soft-text leading-tight">Kantor Pertanahan</h1>
+                    <p class="text-sm font-medium text-soft-muted">Kabupaten Mamuju Tengah</p>
+                </div>
+            </div>
+            
+            <!-- System Status Indicator -->
+            <div class="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-soft-border text-xs font-medium text-soft-muted shadow-sm flex items-center gap-2 hover:bg-white transition-colors cursor-default">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                Sistem Portal Operasional
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto py-12 z-10">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-16 w-full max-w-3xl">
+            <!-- Eyebrow Tag -->
+            <div class="opacity-0 animate-fade-in-up delay-100 flex justify-center mb-6">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold tracking-wide shadow-sm">
+                    <i class="ph-fill ph-circles-four"></i>
+                    Portal Layanan Terpadu
+                </span>
+            </div>
+            
+            <!-- Main Headline -->
+            <h2 class="opacity-0 animate-fade-in-up delay-200 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-soft-text mb-6 leading-[1.1]">
+                Seksi <span class="text-gradient">Penataan &<br class="hidden sm:block"> Pemberdayaan</span>
+            </h2>
+            
+            <!-- Subheadline -->
+            <p class="opacity-0 animate-fade-in-up delay-300 text-base sm:text-lg text-soft-muted leading-relaxed font-normal max-w-2xl mx-auto">
+                Pusat integrasi sistem informasi dan layanan elektronik. Pilih aplikasi di bawah ini untuk mengakses dashboard pengelolaan data dan layanan teknis pertanahan.
+            </p>
+        </div>
+
+        <!-- Applications Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
+            
+            <!-- Card 1: Portal PTP (Blue Theme) -->
+            <div class="portal-card rounded-3xl p-8 flex flex-col h-full opacity-0 animate-fade-in-up delay-300 relative overflow-hidden group hover:border-blue-200">
+                <!-- Soft hover gradient background inside card -->
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-50/0 to-blue-50/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+
+                <div class="relative z-10 flex-grow">
+                    <div class="flex items-center justify-between mb-6">
+                        <!-- Icon uses Blue -->
+                        <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white">
+                            <i class="ph-duotone ph-map-trifold text-3xl"></i>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-soft-text mb-1 tracking-tight">
+                        Portal PTP
+                    </h3>
+                    <h4 class="text-xs font-bold text-blue-600 mb-4 uppercase tracking-wider">
+                        Pertimbangan Teknis Pertanahan
+                    </h4>
+                    
+                    <p class="text-soft-muted text-sm leading-relaxed mb-6">
+                        Sistem informasi tata laksana kajian fisik dan yuridis bidang tanah.
+                    </p>
+                </div>
+                
+                <!-- Dual Links (Action Buttons) -->
+                <div class="relative z-10 mt-auto flex flex-col sm:flex-row gap-3 pt-6 border-t border-slate-100">
+                    <a href="https://script.google.com/macros/s/AKfycbyMWhk7sa-hIj6ppu5guZ3pNMP_VB-8lYCzqACk9oeIMRiECPD7nIl0jMxEDxS_S161/exec" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all shadow-sm shadow-blue-600/20 hover:shadow-blue-600/40 hover:-translate-y-0.5">
+                        <i class="ph-bold ph-app-window text-lg"></i>
+                        Aplikasi
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1YRXS1Gtycd87k_oV32-i3uPj993llpsSeF3ZkoalXEw/edit?gid=0#gid=0" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 text-sm font-medium rounded-xl transition-all border border-blue-200/50 hover:border-blue-300">
+                        <i class="ph-bold ph-table text-lg"></i>
+                        Data
+                    </a>
+                    <a href="https://script.google.com/macros/s/AKfycbySFB648eSZ-t4GSifyJoTCWD0S30_Py4FATAGY-FOXlzQh3geEYiToydipNpggVkIQag/exec" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all shadow-sm shadow-blue-600/20 hover:shadow-blue-600/40 hover:-translate-y-0.5">
+                        <i class="ph-bold ph-app-window text-lg"></i>
+                        Ekspedisi
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2: Progress & Realisasi (Emerald/Teal Theme) -->
+            <div class="portal-card rounded-3xl p-8 flex flex-col h-full opacity-0 animate-fade-in-up delay-400 relative overflow-hidden group hover:border-emerald-200">
+                <!-- Soft hover gradient background inside card -->
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-50/0 to-emerald-50/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+
+                <div class="relative z-10 flex-grow">
+                    <div class="flex items-center justify-between mb-6">
+                        <!-- Icon uses Emerald -->
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white">
+                            <i class="ph-duotone ph-chart-line-up text-3xl"></i>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-soft-text mb-1 tracking-tight">
+                        Progress & Realisasi
+                    </h3>
+                    <h4 class="text-xs font-bold text-emerald-600 mb-4 uppercase tracking-wider">
+                        Kegiatan dan Anggaran
+                    </h4>
+                    
+                    <p class="text-soft-muted text-sm leading-relaxed mb-6">
+                        Dashboard pemantauan capaian target kinerja dan serapan anggaran.
+                    </p>
+                </div>
+                
+                <!-- Dual Links (Action Buttons) -->
+                <div class="relative z-10 mt-auto flex flex-col sm:flex-row gap-3 pt-6 border-t border-slate-100">
+                    <a href="https://script.google.com/macros/s/AKfycbxpGl52XGHDF4EKBLpKZo-t9g0PAliISScutpE7ghm_gYAbRsJZuar76Q28HhFMwcM9Wg/exec" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-xl transition-all shadow-sm shadow-emerald-600/20 hover:shadow-emerald-600/40 hover:-translate-y-0.5">
+                        <i class="ph-bold ph-app-window text-lg"></i>
+                        Aplikasi
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1cWbWsIzYLKEG8tI1UYZtTDfP4cu-rLneGrKmPm_TlcA/edit?usp=sharing" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-sm font-medium rounded-xl transition-all border border-emerald-200/50 hover:border-emerald-300">
+                        <i class="ph-bold ph-table text-lg"></i>
+                        Data
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-8 text-center z-10 mt-auto opacity-0 animate-fade-in-up delay-400">
+        <div class="flex flex-col items-center justify-center space-y-2">
+            <!-- Small subtle divider -->
+            <div class="w-12 h-1 bg-blue-100 rounded-full mb-4"></div>
+            
+            <p class="text-sm text-soft-text font-medium">
+                &copy; <span id="currentYear"></span> Seksi Penataan dan Pemberdayaan
+            </p>
+            <p class="text-xs text-soft-muted max-w-xs sm:max-w-none mx-auto">
+                Kantor Pertanahan Kabupaten Mamuju Tengah
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Add a subtle parallax effect to the ambient blobs based on mouse movement
+        document.addEventListener('mousemove', (e) => {
+            const blobs = document.querySelectorAll('.ambient-blob');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 15;
+                const moveX = (x - 0.5) * speed;
+                const moveY = (y - 0.5) * speed;
+                
+                // Only apply parallax if it's not the center glow
+                if(index < 2) {
+                    blob.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
+                }
+            });
+        });
+
+        // Reset transforms when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            const blobs = document.querySelectorAll('.ambient-blob');
+            blobs.forEach((blob, index) => {
+                if(index < 2) {
+                    blob.style.transform = 'translate(0px, 0px) scale(1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
