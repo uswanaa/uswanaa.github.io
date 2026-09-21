@@ -8,55 +8,43 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter for clean, minimalist typography -->
+    <!-- Google Fonts: Plus Jakarta Sans for a highly modern, geometric look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Phosphor Icons for elegant minimalist icons -->
+    <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
+    <!-- GSAP for Modern Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     },
                     colors: {
-                        // Soft blue and white palette
-                        soft: {
-                            blue: '#EEF6FF',
-                            white: '#FFFFFF',
-                            text: '#2A3B52',
-                            muted: '#64748B',
-                            accent: '#3B82F6',
-                            border: '#E2E8F0'
+                        // Bespoke color palette (Non-generic)
+                        custom: {
+                            bg: '#eef2f6',
+                            text: '#1a1f2b',
+                            muted: '#636e82',
+                            // Ditingkatkan dari 0.55 menjadi 0.9 agar lebih solid dan konten lebih kontras
+                            cardBg: 'rgba(255, 255, 255, 0.90)',
+                            // Border putih solid
+                            cardBorder: 'rgba(255, 255, 255, 1)',
+                            // Unique accents for each card
+                            accent1: '#4361EE', // Modern Royal Blue
+                            accent2: '#059669', // Emerald Jewel
+                            accent3: '#E35F21', // Terracotta/Amber
                         }
                     },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'blob': 'blob 10s infinite alternate',
-                        'blob-reverse': 'blob-reverse 12s infinite alternate',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        'blob-reverse': {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(-30px, 50px) scale(1.2)' },
-                            '66%': { transform: 'translate(20px, -20px) scale(0.8)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        }
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.05)',
+                        'glass-hover': '0 12px 40px 0 rgba(31, 38, 135, 0.1)',
                     }
                 }
             }
@@ -65,252 +53,285 @@
     
     <style>
         body {
-            background-color: #F8FAFC;
-            color: #2A3B52;
+            background-color: #eef2f6;
+            color: #1a1f2b;
             overflow-x: hidden;
-            /* Subtle grid background */
+            margin: 0;
+            padding: 0;
+            /* Minimalist grid */
             background-image: 
-                linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
+                linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
 
-        /* Typography optimizations */
-        h1, h2, h3, h4, h5, h6 {
-            letter-spacing: -0.02em;
+        /* Hide elements initially to prevent FOUC (Flash of Unstyled Content) before GSAP runs */
+        .gsap-reveal {
+            opacity: 0;
+            visibility: hidden;
         }
 
-        /* Smooth gradient text */
-        .text-gradient {
-            background: linear-gradient(135deg, #2563EB, #38BDF8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Ambient animated blobs */
-        .ambient-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.6;
-        }
-
-        /* Premium Glass Card Styles */
-        .portal-card {
-            background: rgba(255, 255, 255, 0.7);
+        /* Premium Frosted Glass Card */
+        .glass-card {
+            background: var(--tw-colors-custom-cardBg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 1);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 10px 25px -5px rgba(0, 0, 0, 0.03);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--tw-colors-custom-cardBorder);
+            /* Menambahkan inset shadow putih untuk efek 3D bevel/cahaya dari dalam */
+            box-shadow: 
+                var(--tw-shadow-glass),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+                inset 1px 0 0 0 rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Generic Hover effect for cards */
-        .portal-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-            background: rgba(255, 255, 255, 0.95);
+        /* Abstract Dynamic Background Elements */
+        .ambient-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
         }
 
-        /* Animation delays */
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
-        .delay-300 { animation-delay: 300ms; }
-        .delay-400 { animation-delay: 400ms; }
+        .btn-arrow {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .glass-card:hover .btn-arrow {
+            transform: translateX(6px);
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col relative font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-custom-accent1 selection:text-white">
 
-    <!-- Soft Blue Ambient Background Elements -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
-        <!-- Top left soft blue -->
-        <div class="ambient-blob bg-blue-200 w-[500px] h-[500px] top-[-150px] left-[-150px] animate-blob"></div>
-        <!-- Bottom right soft cyan/sky -->
-        <div class="ambient-blob bg-sky-200 w-[600px] h-[600px] bottom-[-200px] right-[-100px] animate-blob-reverse"></div>
-        <!-- Center subtle white glow to keep text readable -->
-        <div class="ambient-blob bg-white w-[800px] h-[800px] top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 opacity-80 z-[-1]"></div>
+    <!-- Custom Animated GSAP Background -->
+    <div id="bg-shapes">
+        <div class="ambient-shape bg-indigo-300 w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] top-[-10%] left-[-10%]"></div>
+        <div class="ambient-shape bg-orange-200 w-[50vw] h-[50vw] md:w-[35vw] md:h-[35vw] bottom-[-10%] right-[-5%]"></div>
+        <div class="ambient-shape bg-emerald-200 w-[40vw] h-[40vw] md:w-[25vw] md:h-[25vw] top-[40%] left-[40%]"></div>
     </div>
 
-    <!-- Header -->
-    <!-- <header class="w-full pt-8 pb-4 px-6 lg:px-12 z-10 animate-fade-in-up">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-4 group cursor-default">
-                <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-soft-border flex items-center justify-center text-blue-600 transition-transform duration-500 group-hover:scale-105 group-hover:shadow-md">
-                    <i class="ph-duotone ph-buildings text-2xl"></i>
-                </div>
-                <div class="flex flex-col text-center md:text-left">
-                    <span class="text-[10px] uppercase tracking-wider font-semibold text-soft-muted mb-0.5">Kementerian ATR / BPN</span>
-                    <h1 class="text-base font-bold text-soft-text leading-tight">Kantor Pertanahan</h1>
-                    <p class="text-sm font-medium text-soft-muted">Kabupaten Mamuju Tengah</p>
-                </div>
-            </div>
-            
-            <div class="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-soft-border text-xs font-medium text-soft-muted shadow-sm flex items-center gap-2 hover:bg-white transition-colors cursor-default">
-                <span class="relative flex h-2.5 w-2.5">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                </span>
-                Sistem Portal Operasional
-            </div>
-        </div>
-    </header> -->
-
     <!-- Main Content Area -->
-    <main class="flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto py-12 z-10">
+    <main class="flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto py-16 sm:py-24 z-10 relative">
         
         <!-- Hero Section -->
-        <div class="text-center mb-16 w-full max-w-3xl">
-            <!-- Eyebrow Tag -->
-            <div class="opacity-0 animate-fade-in-up delay-100 flex justify-center mb-6">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold tracking-wide shadow-sm">
-                    <i class="ph-fill ph-circles-four"></i>
+        <div class="text-center mb-16 w-full max-w-3xl hero-container">
+            <!-- Eyebrow -->
+            <div class="flex justify-center mb-5 gsap-reveal hero-item">
+                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-md border border-white/80 text-custom-text text-[11px] font-bold tracking-widest uppercase shadow-sm">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
                     Portal Layanan Terpadu
                 </span>
             </div>
             
             <!-- Main Headline -->
-            <h2 class="opacity-0 animate-fade-in-up delay-200 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-soft-text mb-6 leading-[1.1]">
-                Seksi <span class="text-gradient">Penataan &<br class="hidden sm:block"> Pemberdayaan</span>
-            </h2>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-custom-text mb-6 leading-[1.1] tracking-tight gsap-reveal hero-item">
+                Seksi Penataan &<br class="hidden sm:block"> 
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-custom-accent1 to-purple-600">Pemberdayaan</span>
+            </h1>
             
             <!-- Subheadline -->
-            <!-- <p class="opacity-0 animate-fade-in-up delay-300 text-base sm:text-lg text-soft-muted leading-relaxed font-normal max-w-2xl mx-auto">
-                Portal terpadu Seksi Penataan dan Pemberdayaan
-            </p> -->
+            <p class="text-base sm:text-lg text-custom-muted leading-relaxed font-medium max-w-2xl mx-auto gsap-reveal hero-item">
+                Portal integrasi layanan sistem informasi. Akses cepat untuk manajemen data, pertimbangan teknis, dan arsip digital secara terpusat.
+            </p>
         </div>
 
         <!-- Applications Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full card-grid">
             
-            <!-- Card 1: Portal PTP (Blue Theme) -->
-            <div class="portal-card rounded-3xl p-8 flex flex-col h-full opacity-0 animate-fade-in-up delay-300 relative overflow-hidden group hover:border-blue-200">
-                <!-- Soft hover gradient background inside card -->
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-50/0 to-blue-50/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-
+            <!-- Card 1: Portal PTP -->
+            <div class="glass-card rounded-3xl p-8 flex flex-col h-full gsap-reveal portal-card bg-[#f1f1f1]">
                 <div class="relative z-10 flex-grow">
-                    <div class="flex items-center justify-between mb-6">
-                        <!-- Icon uses Blue -->
-                        <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white">
-                            <i class="ph-duotone ph-map-trifold text-3xl"></i>
-                        </div>
+                    <!-- Icon -->
+                    <div class="w-16 h-16 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-custom-accent1 mb-8 icon-wrapper">
+                        <i class="ph-duotone ph-map-trifold text-4xl"></i>
                     </div>
                     
-                    <h3 class="text-2xl font-bold text-soft-text mb-1 tracking-tight">
-                        Portal PTP
-                    </h3>
-                    <h4 class="text-xs font-bold text-blue-600 mb-4 uppercase tracking-wider">
-                        Pertimbangan Teknis Pertanahan
-                    </h4>
-                    
-                    <p class="text-soft-muted text-sm leading-relaxed mb-6">
-                        Pusat Data dan Informasi Pertimbangan Teknis Pertanahan.
+                    <h2 class="text-xl font-bold text-custom-text mb-2 tracking-tight">Portal PTP</h2>
+                    <p class="text-custom-muted text-sm leading-relaxed mb-8 font-medium">
+                        Pusat Data dan Informasi Pertimbangan Teknis Pertanahan..
                     </p>
                 </div>
                 
-                <!-- Dual Links (Action Buttons) -->
-                <div class="relative z-10 mt-auto flex flex-col sm:flex-row gap-3 pt-6 border-t border-slate-100">
-                    <a href="https://script.google.com/macros/s/AKfycbyMWhk7sa-hIj6ppu5guZ3pNMP_VB-8lYCzqACk9oeIMRiECPD7nIl0jMxEDxS_S161/exec" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all shadow-sm shadow-blue-600/20 hover:shadow-blue-600/40 hover:-translate-y-0.5">
-                        <i class="ph-bold ph-app-window text-lg"></i>
-                        Buka
+                <!-- Single Action Button -->
+                <div class="relative z-10 mt-auto pt-6 border-t border-slate-200/50">
+                    <a target="_blank" href="https://script.google.com/macros/s/AKfycbyMWhk7sa-hIj6ppu5guZ3pNMP_VB-8lYCzqACk9oeIMRiECPD7nIl0jMxEDxS_S161/exec" class="group flex items-center justify-between w-full px-5 py-3.5 bg-custom-accent1 hover:bg-blue-700 text-white text-sm font-semibold rounded-2xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(67,97,238,0.39)] hover:shadow-[0_6px_20px_rgba(67,97,238,0.23)]">
+                        <span class="flex items-center gap-2">
+                            <i class="ph-bold ph-app-window text-lg"></i>
+                            Buka
+                        </span>
+                        <i class="ph-bold ph-arrow-right text-base btn-arrow"></i>
                     </a>
-                    <!-- <a href="https://docs.google.com/spreadsheets/d/1YRXS1Gtycd87k_oV32-i3uPj993llpsSeF3ZkoalXEw/edit?gid=0#gid=0" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 text-sm font-medium rounded-xl transition-all border border-blue-200/50 hover:border-blue-300">
-                        <i class="ph-bold ph-table text-lg"></i>
-                        Data
-                    </a> -->
-                    <!-- <a href="https://script.google.com/macros/s/AKfycbySFB648eSZ-t4GSifyJoTCWD0S30_Py4FATAGY-FOXlzQh3geEYiToydipNpggVkIQag/exec" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all shadow-sm shadow-blue-600/20 hover:shadow-blue-600/40 hover:-translate-y-0.5">
-                        <i class="ph-bold ph-app-window text-lg"></i>
-                        Ekspedisi
-                    </a> -->
                 </div>
             </div>
 
-            <!-- Card 2: Progress & Realisasi (Emerald/Teal Theme) -->
-            <div class="portal-card rounded-3xl p-8 flex flex-col h-full opacity-0 animate-fade-in-up delay-400 relative overflow-hidden group hover:border-emerald-200">
-                <!-- Soft hover gradient background inside card -->
-                <div class="absolute inset-0 bg-gradient-to-br from-emerald-50/0 to-emerald-50/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-
+            <!-- Card 2: Progress & Realisasi -->
+            <div class="glass-card rounded-3xl p-8 flex flex-col h-full gsap-reveal portal-card bg-[#f1f1f1]">
                 <div class="relative z-10 flex-grow">
-                    <div class="flex items-center justify-between mb-6">
-                        <!-- Icon uses Emerald -->
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white">
-                            <i class="ph-duotone ph-chart-line-up text-3xl"></i>
-                        </div>
+                    <!-- Icon -->
+                    <div class="w-16 h-16 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-custom-accent2 mb-8 icon-wrapper">
+                        <i class="ph-duotone ph-chart-line-up text-4xl"></i>
                     </div>
                     
-                    <h3 class="text-2xl font-bold text-soft-text mb-1 tracking-tight">
-                        Progress & Realisasi
-                    </h3>
-                    <h4 class="text-xs font-bold text-emerald-600 mb-4 uppercase tracking-wider">
-                        Kegiatan dan Anggaran
-                    </h4>
-                    
-                    <p class="text-soft-muted text-sm leading-relaxed mb-6">
+                    <h2 class="text-xl font-bold text-custom-text mb-2 tracking-tight">Progress & Realisasi</h2>
+                    <p class="text-custom-muted text-sm leading-relaxed mb-8 font-medium">
                         Dashboard pemantauan capaian kegiatan dan realisasi anggaran.
                     </p>
                 </div>
                 
-                <!-- Dual Links (Action Buttons) -->
-                <div class="relative z-10 mt-auto flex flex-col sm:flex-row gap-3 pt-6 border-t border-slate-100">
-                    <a href="https://script.google.com/macros/s/AKfycbxpGl52XGHDF4EKBLpKZo-t9g0PAliISScutpE7ghm_gYAbRsJZuar76Q28HhFMwcM9Wg/exec" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-xl transition-all shadow-sm shadow-emerald-600/20 hover:shadow-emerald-600/40 hover:-translate-y-0.5">
-                        <i class="ph-bold ph-app-window text-lg"></i>
-                        Buka
+                <!-- Single Action Button -->
+                <div class="relative z-10 mt-auto pt-6 border-t border-slate-200/50">
+                    <a target="_blank" href="https://script.google.com/macros/s/AKfycbxpGl52XGHDF4EKBLpKZo-t9g0PAliISScutpE7ghm_gYAbRsJZuar76Q28HhFMwcM9Wg/exec" class="group flex items-center justify-between w-full px-5 py-3.5 bg-custom-accent2 hover:bg-emerald-700 text-white text-sm font-semibold rounded-2xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)]">
+                        <span class="flex items-center gap-2">
+                            <i class="ph-bold ph-app-window text-lg"></i>
+                            Buka
+                        </span>
+                        <i class="ph-bold ph-arrow-right text-base btn-arrow"></i>
                     </a>
-                    <!-- <a href="https://docs.google.com/spreadsheets/d/1cWbWsIzYLKEG8tI1UYZtTDfP4cu-rLneGrKmPm_TlcA/edit?usp=sharing" class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-sm font-medium rounded-xl transition-all border border-emerald-200/50 hover:border-emerald-300">
-                        <i class="ph-bold ph-table text-lg"></i>
-                        Data
-                    </a> -->
+                </div>
+            </div>
+
+            <!-- Card 3: Arsip Digital -->
+            <div class="glass-card rounded-3xl p-8 flex flex-col h-full gsap-reveal portal-card bg-[#f1f1f1]">
+                <div class="relative z-10 flex-grow">
+                    <!-- Icon -->
+                    <div class="w-16 h-16 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-custom-accent3 mb-8 icon-wrapper">
+                        <i class="ph-duotone ph-folder-open text-4xl"></i>
+                    </div>
+                    
+                    <h2 class="text-xl font-bold text-custom-text mb-2 tracking-tight">Arsip Digital</h2>
+                    <p class="text-custom-muted text-sm leading-relaxed mb-8 font-medium">
+                        Penyimpanan dan manajemen dokumen internal.
+                    </p>
+                </div>
+                
+                <!-- Single Action Button -->
+                <div class="relative z-10 mt-auto pt-6 border-t border-slate-200/50">
+                    <a target="_blank" href="https://drive.google.com/drive/folders/1M0gh3-Ttj9FpfS8m6Fu6e8Nh2B4kLyZd?usp=drive_link" class="group flex items-center justify-between w-full px-5 py-3.5 bg-custom-accent3 hover:bg-orange-700 text-white text-sm font-semibold rounded-2xl transition-all duration-300 shadow-[0_4px_14px_0_rgba(227,95,33,0.39)] hover:shadow-[0_6px_20px_rgba(227,95,33,0.23)]">
+                        <span class="flex items-center gap-2">
+                            <i class="ph-bold ph-app-window text-lg"></i>
+                            Buka
+                        </span>
+                        <i class="ph-bold ph-arrow-right text-base btn-arrow"></i>
+                    </a>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="w-full py-8 text-center z-10 mt-auto opacity-0 animate-fade-in-up delay-400">
-        <div class="flex flex-col items-center justify-center space-y-2">
-            <!-- Small subtle divider -->
-            <div class="w-12 h-1 bg-blue-100 rounded-full mb-4"></div>
-            
-            <p class="text-sm text-soft-text font-medium">
-                &copy; <span id="currentYear"></span> Seksi Penataan dan Pemberdayaan
-            </p>
-            <p class="text-xs text-soft-muted max-w-xs sm:max-w-none mx-auto">
-                Kantor Pertanahan Kabupaten Mamuju Tengah
-            </p>
-        </div>
+    <!-- Simple Footer -->
+    <footer class="w-full py-8 text-center z-10 mt-auto gsap-reveal hero-item">
+        <p class="text-sm text-custom-text font-bold">
+            &copy; <span id="currentYear"></span> Kantor Pertanahan Kabupaten Mamuju Tengah
+        </p>
     </footer>
 
     <script>
         // Set dynamic year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Add a subtle parallax effect to the ambient blobs based on mouse movement
-        document.addEventListener('mousemove', (e) => {
-            const blobs = document.querySelectorAll('.ambient-blob');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
+        // GSAP Initialization and Animations
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin();
 
-            blobs.forEach((blob, index) => {
-                const speed = (index + 1) * 15;
-                const moveX = (x - 0.5) * speed;
-                const moveY = (y - 0.5) * speed;
+            // 1. Initial Load Timeline
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+            // Reveal Hero Elements
+            tl.fromTo(".hero-item", 
+                { y: 30, autoAlpha: 0 }, 
+                { y: 0, autoAlpha: 1, duration: 1, stagger: 0.15 }
+            );
+
+            // Reveal Cards with a slight stagger and scale effect
+            tl.fromTo(".portal-card", 
+                { y: 50, scale: 0.95, autoAlpha: 0 }, 
+                { y: 0, scale: 1, autoAlpha: 1, duration: 0.8, stagger: 0.1 },
+                "-=0.4" // Overlap with previous animation
+            );
+
+            // 2. Interactive Card Hover Effects (3D-ish feel)
+            const cards = document.querySelectorAll('.portal-card');
+            
+            cards.forEach(card => {
+                const icon = card.querySelector('.icon-wrapper');
                 
-                // Only apply parallax if it's not the center glow
-                if(index < 2) {
-                    blob.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
-                }
-            });
-        });
+                // Mouse Enter Event
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, {
+                        y: -8,
+                        scale: 1.02,
+                        boxShadow: '0 20px 40px 0 rgba(31, 38, 135, 0.15)',
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                    
+                    gsap.to(icon, {
+                        scale: 1.1,
+                        rotation: 5,
+                        duration: 0.3,
+                        ease: "back.out(1.7)"
+                    });
+                });
 
-        // Reset transforms when mouse leaves
-        document.addEventListener('mouseleave', () => {
-            const blobs = document.querySelectorAll('.ambient-blob');
-            blobs.forEach((blob, index) => {
-                if(index < 2) {
-                    blob.style.transform = 'translate(0px, 0px) scale(1)';
-                }
+                // Mouse Leave Event
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        y: 0,
+                        scale: 1,
+                        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)',
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                    
+                    gsap.to(icon, {
+                        scale: 1,
+                        rotation: 0,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                });
+            });
+
+            // 3. Ambient Background Animation (Slow drifting shapes)
+            const shapes = document.querySelectorAll('.ambient-shape');
+            
+            shapes.forEach((shape, index) => {
+                // Generate random movement
+                const randomX = () => gsap.utils.random(-100, 100);
+                const randomY = () => gsap.utils.random(-100, 100);
+                
+                // Continuous slow floating animation
+                gsap.to(shape, {
+                    x: randomX,
+                    y: randomY,
+                    duration: gsap.utils.random(15, 25),
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                    delay: index * 2
+                });
+            });
+            
+            // 4. Subtle Parallax on mouse move for background shapes
+            document.addEventListener('mousemove', (e) => {
+                const xPos = (e.clientX / window.innerWidth - 0.5) * 40;
+                const yPos = (e.clientY / window.innerHeight - 0.5) * 40;
+
+                gsap.to(shapes, {
+                    x: `+=${xPos}`,
+                    y: `+=${yPos}`,
+                    duration: 2,
+                    ease: "power2.out",
+                    overwrite: "auto"
+                });
             });
         });
     </script>
