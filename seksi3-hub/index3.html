@@ -1024,7 +1024,7 @@ void main(){
         gl.useProgram(o.p); gl.uniform1i(o.u.n, 0); gl.enableVertexAttribArray(o.a); gl.vertexAttribPointer(o.a, 2, gl.FLOAT, false, 0, 0); S.pr = o; return true;
       }
       function resize() { // batas jumlah piksel: latar halus tidak perlu resolusi layar penuh
-        const f = Math.min(1, Math.sqrt(S.budget / (innerWidth * innerHeight))) * S.scale;
+        const f = Math.min(Math.sqrt(S.budget / (innerWidth * innerHeight)), Math.min(devicePixelRatio || 1, 1.25)) * S.scale;
         cv.width = Math.max(2, Math.round(innerWidth * f)); cv.height = Math.max(2, Math.round(innerHeight * f));
         gl.viewport(0, 0, cv.width, cv.height);
         draw(S.t || 0); // gambar langsung agar tidak ada kedipan kosong
@@ -1037,8 +1037,8 @@ void main(){
       }
       function slow() { // turunkan kualitas bertahap
         if (root.classList.contains('hq')) { root.classList.remove('hq'); S.noHq = true; return; }
-        if (S.scale > .42) { S.scale *= .8; resize(); return; }
-        if (!S.lite && use(true)) { S.lite = true; S.scale = Math.min(1, S.scale * 1.6); resize(); return; }
+        if (S.scale > .42) { S.cap = S.scale * .9; S.scale *= .8; resize(); return; }
+        if (!S.lite && use(true)) { S.lite = true; S.cap = 1; S.scale = Math.min(1, S.scale * 1.6); resize(); return; }
         if (S.iv < 20) { S.iv = 32; return; }
         stop(); // tetap lambat: pakai latar CSS
       }
@@ -1046,7 +1046,11 @@ void main(){
         if (S.warm) { S.warm = 0; return; }
         const bad = S.iv > 20 ? 46 : 27, good = S.iv > 20 ? 36 : 22;
         if (avg > bad) { S.good = 0; slow(); return; }
-        if (!S.lite && !S.noHq && avg < good && ++S.good >= 2) root.classList.add('hq'); // efek kaca buram hanya untuk perangkat kuat
+        if (avg < good) {
+          S.good++;
+          if (!S.lite && !S.noHq && S.good >= 2 && !root.classList.contains('hq')) root.classList.add('hq'); // blur kaca hanya untuk perangkat kuat
+          else if (S.good >= 8 && S.scale < S.cap) { S.scale = Math.min(S.cap, S.scale * 1.2); S.good = 0; resize(); } // naik lagi bila lancar
+        }
       }
       function frame(now) {
         raf = requestAnimationFrame(frame);
@@ -1081,7 +1085,7 @@ void main(){
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
         const weak = (navigator.hardwareConcurrency || 4) <= 2 || (navigator.deviceMemory || 8) <= 2;
-        S = { anim: anim, lite: weak, budget: /intel.*(hd|uhd) graphics/i.test(gpu) ? 420000 : 700000, scale: 1, iv: 14, mx: .5, my: .55, px: .5, py: .55, cx: .5, cy: .5, ct: -99, lm: -1e9, t0: performance.now(), last: performance.now(), acc: 0, n: 0, warm: 1, good: 0, noHq: false, t: 0, pr: null };
+        S = { anim: anim, lite: weak, budget: !anim ? 3000000 : /intel.*(hd|uhd) graphics/i.test(gpu) ? 1000000 : 1350000, scale: 1, cap: 1, iv: 14, mx: .5, my: .55, px: .5, py: .55, cx: .5, cy: .5, ct: -99, lm: -1e9, t0: performance.now(), last: performance.now(), acc: 0, n: 0, warm: 1, good: 0, noHq: false, t: 0, pr: null };
         gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
         if (!use(S.lite) && !(S.lite = true, use(true))) return;
